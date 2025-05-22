@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toastiary - Koleksi Buku</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      color: #1B2E5A;
+    }
+	
+	.profil-header {
+	  text-align: center;
+	  background-color:  #7b1fa2;
+	  padding: 15px;
+	  border-radius: 0;
+	  font-size: 1.2em;
+	  color: white;
+	  font-weight: bold;
+	  margin-top: 30px;
+	  margin-bottom: 30px;
+	  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	  animation: fadeIn 1.5s ease-in-out;
+	}
+
+    .search-bar {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .search-bar input {
+      padding: 15px 25px;
+      width: 400px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: 2px solid #ffa64d;
+      outline: none;
+    }
+
+    .search-bar button {
+      padding: 15px 20px;
+      background-color: #ffa64d;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-left: 10px;
+      color: white;
+	  transition: all 0.3s ease;
+    }
+	.search-bar button:hover {
+	  transform: scale(1.05);
+	}
+
+	search-bar button:active {
+	  transform: scale(0.95);
+	}
+
+	.back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    .back-button:hover {
+      background-color: #2980b9;
+    }
+	
+	.back-button img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .book-cover {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .book-cover:hover {
+      transform: scale(1.03);
+    }
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #e26d00;
+    }
+
+    .book-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0 40px 40px;
+      justify-content: center;
+    }
+
+    .book-card {
+      background-color: #FFF8F0;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+      width: 160px;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 8px;
+    }
+
+    .buttons button {
+      background-color: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #ff6f61;
+    }
+
+    .buttons button:hover {
+      transform: scale(1.2);
+    }
+	
+    footer {
+      background-color:  #7b1fa2;
+	  display: flex;
+	  align-items: center;
+      text-align: center;
+	  justify-content: center;
+      padding: 15px;
+      color: white;
+      font-weight: bold;
+      margin-top: 30px;
+	  margin-bottom: 30px;
+	  height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="window.location.href='../index.html'">
+    <img src="https://img.icons8.com/?size=80&id=uXxiRTNgkmaS&format=png" alt="Back">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+
+  <div class="profil-header">Koleksi</div>
+
+
+  <div class="search-bar">
+	<input type="text" id="searchInput" placeholder="Cari bukumu di sini!">
+	<button onclick="cariBuku()">Cari</button>
+  </div>
+	
+	
+  <div class="section-title">BUKU TERSEDIA</div>
+
+  <div class="book-grid">
+    <div class="book-card"data-title="balirina">
+      <img src="https://i.pinimg.com/736x/8c/2d/4e/8c2d4eee926fb4b100f2d4f58816cdee.jpg" alt="Balirina">
+      Balirina
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card" data-title="jebakan alunan musik">
+      <img src="https://i.pinimg.com/736x/85/24/a8/8524a825224df08ea33b4ea0c56c32b2.jpg" alt="Jebakan Alunan Musik">
+      Jebakan Alunan Musik
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="Jejak persahabatan">
+      <img src="https://i.pinimg.com/736x/4f/ed/5e/4fed5ec33eb151a05ae13ce1a4da64f7.jpg" alt="Jejak Persahabatan">
+      Jejak Persahabatan
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="jam penghenti waktu">
+      <img src="https://i.pinimg.com/736x/af/8d/a2/af8da24e795c5870d94d61bce3f42178.jpg" alt="Jam Penghenti Waktu">
+      Jam Penghenti Waktu
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="the butterfly garden">
+      <img src="https://i.pinimg.com/736x/18/42/b8/1842b8e14cbc6044bc4ad54467c6c417.jpg" alt="The Butterfly Garden">
+      The Butterfly Garden
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="ayo berteman!">
+      <img src="https://i.pinimg.com/736x/be/93/4c/be934ca4ca55a05e01254c4ee470cbee.jpg" alt="Ayo berteman!">
+      Ayo Berteman!
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="putri & pangeran">
+      <img src="https://i.pinimg.com/736x/0b/d2/e9/0bd2e9e7d9f4ff790b3eef9f512d3694.jpg" alt="Putri & Pangeran">
+      Putri & Pangeran
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="si kancil">
+      <img src="https://i.pinimg.com/736x/30/b8/a0/30b8a00cd07359737bb1b01a6b55853a.jpg" alt="Si Kancil">
+      Si Kancil
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="dongeng mancanegara pilihan">
+      <img src="https://i.pinimg.com/736x/3d/91/72/3d9172e64b920dbffc24d7882b5e4b5a.jpg" alt="Dongeng Mancanegara Pilihan">
+      Dongeng Mancanegara Pilihan
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="mengenal binatang">
+      <img src="https://i.pinimg.com/736x/38/ae/87/38ae875f4771602c6fd86e5d3694d457.jpg" alt="Mengenal Binatang">
+      Mengenal Binatang
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="mengenal buah & sayur">
+      <img src="https://i.pinimg.com/736x/ae/d4/2d/aed42d0ca31b9a2b9963fedacbe0a1ae.jpg" alt="Mengenal Buah & Sayur">
+      Mengenal Buah & Sayur
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="mengenal benda sekitar">
+      <img src="https://i.pinimg.com/736x/5d/00/e0/5d00e010188aa4e76b44a98009bd076d.jpg" alt="Mengenal Benda Sekitar">
+      Mengenal Benda Sekitar
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="why? disabilitas">
+      <img src="https://i.pinimg.com/736x/1d/cc/46/1dcc46a46bd3d9d3699979fc15f47dbc.jpg" alt="Why? Disabilitas">
+      Why? Disabilitas
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="why? ilmu pengetahuan alam">
+      <img src="https://i.pinimg.com/736x/7f/f1/5d/7ff15deb554d21dd870d7b162fcd478a.jpg" alt="Why? Ilmu Pengetahuan Alam">
+      Why? Ilmu Pengetahuan Alam
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="why? hewan & tanaman beracun">
+      <img src="https://i.pinimg.com/736x/9a/a5/c3/9aa5c39007f5c238cf617da5f686020b.jpg" alt="Why? Hewan & Tanaman Beracun">
+      Why? Hewan & Tanaman Beracun
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="aku bisa membaca">
+      <img src="https://i.pinimg.com/736x/38/41/66/384166b673c15e73b3cf47438ac356ee.jpg" alt="Aku Bisa Membaca">
+      Aku Bisa Membaca
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="membaca tanpa mengeja suku kata">
+      <img src="https://i.pinimg.com/736x/ea/01/63/ea016317431345ff9e0933a61283dab4.jpg" alt="Membaca Tanpa Mengeja Suku Kata">
+      Membaca Tanpa Mengeja Suku Kata
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="anak pintar calistung">
+      <img src="https://i.pinimg.com/736x/ed/a9/3f/eda93f1f369ddfe8ec9e4f198b9a7880.jpg" alt="Anak Pintar Calistung">
+      Anak Pintar Calistung
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="belajar baca, tulis, warnai">
+      <img src="https://i.pinimg.com/736x/9b/c3/21/9bc321af7bd2b974545f882d166597fd.jpg" alt="Belajar Baca, Tulis, Warnai">
+      Belajar Baca, Tulis, Warnai
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="cepat bisa baca, tulis, hitung">
+      <img src="https://i.pinimg.com/736x/85/19/0f/85190fcd2dc8a2fc71b06169f24a03ca.jpg" alt="Cepat Bisa Baca, Tulis, Hitung">
+      Cepat Bisa Baca, Tulis, Hitung
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="belajar bahasa isyarat">
+      <img src="https://i.pinimg.com/736x/94/a7/6f/94a76fd353ecaa03ac7c13f60fa16bed.jpg" alt="Belajar Bahasa Isyarat">
+      Belajar Bahasa Isyarat
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card"data-title="komik lieur">
+      <img src="https://i.pinimg.com/736x/85/45/ef/8545efc43a2ac506a7bd2230b9d0df10.jpg" alt="Komik Lieur">
+      Komik Lieur
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card" data-title="pengantar braille">
+      <img src="https://i.pinimg.com/736x/d8/62/32/d86232127d36b706a975492a58dc6535.jpg" alt="Pengantar Braille">
+      Pengantar Braille
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+    
+    <div class="book-card" data-title="keluarga super irit">
+      <img src="https://i.pinimg.com/736x/9a/4f/02/9a4f02cbbc3ff98f197deb4aa23e79d9.jpg" alt="Keluarga Super Irit">
+      Keluarga Super Irit
+      <div class="buttons">
+        <button><i class="fa-regular fa-heart"></i></button>
+        <button><i class="fa-regular fa-comment"></i></button>
+        <button><i class="fa-regular fa-bookmark"></i></button>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    &copy; 2023 Toastiary: Every Toast Whisper a Tales
+  </footer>
+  <script>
+function cariBuku() {
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  const buku = document.querySelectorAll(".book-card");
+
+  buku.forEach(function(card) {
+    const judul = card.getAttribute("data-title").toLowerCase();
+    if (judul.includes(keyword)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+</script>
+<script>
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      cariBuku();
+    }
+  });
+</script>
+
+
+</body>
+</html>

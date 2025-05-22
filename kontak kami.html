@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontak Kami - Toastiary</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      margin: 0;
+    }
+
+   .profil-header {
+	  text-align: center;
+	  background-color:  #7b1fa2;
+	  padding: 15px;
+	  border-radius: 0;
+	  font-size: 1.2em;
+	  color: white;
+	  font-weight: bold;
+	  margin-top: 30px; /* kasih jarak dari atas */
+	  margin-bottom: 30px;
+	  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	  animation: fadeIn 1.5s ease-in-out;
+	}
+
+    main {
+      background-color: white;
+      padding: 30px;
+      max-width: 900px;
+      margin: 20px auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #7b1fa2;
+    }
+	
+	.back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    .back-button:hover {
+      background-color: #2980b9;
+    }
+	
+	.back-button img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .info-kontak-bar {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background-color: #f5eafc;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+
+    .info-kiri {
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .info-item {
+      background-color: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .info-kanan {
+      flex: 1 1 300px;
+    }
+
+    .info-kanan iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .form-kontak label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    .form-kontak input,
+    .form-kontak textarea {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-kontak button {
+      margin-top: 15px;
+      background-color: #7b1fa2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+     footer {
+      background-color:  #7b1fa2;
+	  display: flex;
+	  align-items: center;
+      text-align: center;
+	  justify-content: center;
+      padding: 15px;
+      color: white;
+      font-weight: bold;
+      margin-top: 30px; /* kasih jarak dari atas */
+	  margin-bottom: 30px;
+	  height: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .info-kontak-bar {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profil-header">Kontak Kami</div>
+
+  <main>
+    <section class="info-kontak-bar">
+      <div class="info-kiri">
+        <div class="info-item">
+          <strong>📞 Telepon:</strong><br>(024) 486-458
+        </div>
+        <div class="info-item">
+          <strong>✉️ Email:</strong><br>toastiary@gmail.com
+        </div>
+        <div class="info-item">
+          <strong>📍 Alamat:</strong><br>Toastiary, Jl. Imam Bonjol No. 177, Semarang Tengah
+        </div>
+      </div>
+
+      <div class="info-kanan">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!4v1746156332316!6m8!1m7!1srulomUtXO0DX8HymLz-1LQ!2m2!1d-6.980243724704216!2d110.4108946771299!3f295.04940671235215!4f4.376717199118829!5f0.7820865974627469"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
+
+    <section class="form-kontak">
+      <h2>Kirim Pesan</h2>
+      <form>
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="pesan">Pesan:</label>
+        <textarea id="pesan" name="pesan" rows="5" required></textarea>
+
+        <button type="submit">Kirim</button>
+      </form>
+    </section>
+  </main>
+
+	<button class="back-button" onclick="window.location.href='index.html'">
+    <img src="https://img.icons8.com/?size=80&id=uXxiRTNgkmaS&format=png" alt="Back" align="center"> 
+	</button>
+	
+  <footer>
+    <p>&copy; 2023 Toastiary: Every Toast Whisper a Tales</p>
+  </footer>
+</body>
+</html>
+
+
+
+

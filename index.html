@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toastiary - Perpustakaan Ramah Anak</title>
+  <style>
+    /* Styling preloader */
+    #preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff9ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    #preloader h1 {
+      font-size: 48px;
+      color: #1e70bf;
+      margin: 0;
+    }
+
+    #preloader p {
+      color: #777;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+.popular-img {
+  width: 100%;
+  height: 180px; /* Atur tinggi seragam */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.popular-img:hover {
+  transform: scale(1.05);
+}
+.popular-img:active {
+  transform: scale(0.95);
+}
+.popular-title {
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #d63384;
+}
+
+
+    /* Sembunyikan konten utama dulu */
+    #main-content {
+      display: none;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', cursive, sans-serif;
+      background: #a6c1ee;
+      color: white;
+    }
+    header {
+      background-image: url('https://i.pinimg.com/1200x/ec/6e/e6/ec6ee68fd4dda74e6a27082ecaafce24.jpg');
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+	  height: 80px;
+    }
+    header img {
+      height: 70px;
+    }
+    nav {
+      background-color: #003366;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      position: relative;
+    }
+    nav ul li a {
+      display: block;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: white;
+      background-color: #003366;
+    }
+    nav ul li:hover > a {
+      background-color: #004080;
+    }
+    nav ul li ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #004080;
+      display: none;
+      z-index: 10;
+    }
+    nav ul li:hover ul {
+      display: block;
+    }
+    nav ul li ul li a {
+      padding: 0.75rem 1.5rem;
+      white-space: nowrap;
+    }
+    .carousel {
+      position: relative;
+      max-width: 60%;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+	.carousel-wrapper {
+	  display: flex;
+	  justify-content: center;
+	  margin-top: 2rem;
+	}
+	.slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slides img {
+      min-width: 100%;
+      height: auto;
+	  object-fit: cover;
+	  transition:opacity 0.5s ease;
+    }
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-buttons button {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0 1rem;
+    }
+    .asktiary-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff9933;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 100;
+    }
+    .asktiary-button:hover {
+      background-color: #ff8000;
+    }
+	{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+	.section {
+      margin-bottom: 25px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title::before {
+      content: "📌";
+      margin-right: 8px;
+    }
+
+    .review {
+      background-color: #c7d2fe;
+      color: #1e293b;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .info-box {
+      background-color: #dbeafe;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+    }
+
+  .container {
+      width: 450px;
+      background-color: #e0e7ff;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    footer {
+      background: #d580ff;
+      color: #000;
+      padding: 40px 60px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-column {
+      flex: 1 1 200px;
+      min-width: 200px;
+    }
+
+    .footer-logo img {
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    .footer-column h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-column a,
+    .footer-column p {
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .footer-column a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons img,
+    .store-icons img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="Toastiary Logo" />
+    <h1>Toastiary</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="profil/profil.html">Profil</a>
+      </li>
+      <li><a href="layanan/layanan.html">Layanan</a>
+      </li>
+      <li><a href="koleksi/koleksi.html">Koleksi</a>
+      <li><a href="#">Panduan</a>
+        <ul>
+          <li><a href="panduan/opac.html">Panduan OPAC</a></li>
+          <li><a href="panduan/syarat.html">Syarat & Ketentuan</a></li>
+          <li><a href="panduan/faq.html">FAQ</a></li>
+        </ul>
+      </li>
+      <li><a href="kontak kami/kontak kami.html">Kontak Kami</a></li>
+	  </li>
+      <li><a href="sign up/login sign up page.html">Sign Up</a></li>
+	  </li>
+    </ul>
+  </nav>
+  
+	<div id="preloader">
+    <img src="images/avatar.png" style="width:200px; height: auto;">
+	<h1>Toastiary</h1>
+    <p>Every Toast - Whisper a Tales</p>
+	
+  </div>
+  
+ <!-- Tambahkan wrapper untuk center -->
+<div style="display: flex; justify-content: center; margin-top: 2rem;">
+  <div class="carousel">
+    <div class="slides" id="carouselSlides">
+      <img src="https://i.pinimg.com/736x/54/e4/13/54e4134b5263256bc124114473af420d.jpg" alt="Banner 1">
+      <img src="https://i.pinimg.com/736x/ae/a1/1e/aea11e2e4bf6334f5554cac99f82ac7a.jpg" alt="Banner 2">
+      <img src="https://i.pinimg.com/736x/4b/c1/bb/4bc1bb495f3c44333b78952afdaf1d4d.jpg" alt="Banner 3">
+      <img src="https://i.pinimg.com/736x/cb/38/ef/cb38ef79673941b9625e9323475e65fd.jpg" alt="Banner 4">
+      <img src="https://i.pinimg.com/736x/51/d4/8e/51d48e0e64b19b1bf13ebceb60d268fc.jpg" alt="Banner 5">
+      <img src="https://i.pinimg.com/736x/24/7e/77/247e770b6574450a242c0ff87f6d1675.jpg" alt="Banner 6">
+    </div>
+    <div class="carousel-buttons">
+      <button onclick="moveSlide(-1)">&#10094;</button>
+      <button onclick="moveSlide(1)">&#10095;</button>
+    </div>
+  </div>
+</div>
+
+	<div id="talkback-btn" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
+	  🔊
+	</div>
+
+
+<!-- Konten 2x2 Grid di bawah Banner -->
+<div id="main-content">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1000px; margin: 3rem auto; color: black;">
+    <!-- Kotak 1: Koleksi Populer -->
+   <!-- Kotak 1: Koleksi Populer -->
+<!-- Kotak 1: Koleksi Populer -->
+<div style="background-color: #fff3f3; border-radius: 12px; padding: 20px;">
+  <h2 style="color: #d63384;">📚 Koleksi Populer</h2>
+  <div style="display: flex; gap: 10px; margin-top: 10px;">
+    <div style="width: 30%;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=3813&keywords=KKPK" target="_blank">
+          <img class="popular-img" src="https://i.pinimg.com/736x/af/8d/a2/af8da24e795c5870d94d61bce3f42178.jpg" alt="Jam Penghenti Waktu">
+        </a>
+        <div class="popular-title">Jam Penghenti Waktu</div>
+      </div>
+    </div>
+    <div style="width: 30%;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=1089&keywords=" target="_blank">
+          <img class="popular-img" src="https://i.pinimg.com/736x/1d/cc/46/1dcc46a46bd3d9d3699979fc15f47dbc.jpg" alt="Why? Disabilitas">
+        </a>
+        <div class="popular-title">Why? Disabilitas</div>
+      </div>
+    </div>
+    <div style="width: 30%;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <a href="https://bintangpusnas.perpusnas.go.id/konten/BK8328/belajar-bahasa-isyarat-untuk-anak-tunarungu-dasar" target="_blank">
+          <img class="popular-img" src="https://i.pinimg.com/736x/94/a7/6f/94a76fd353ecaa03ac7c13f60fa16bed.jpg" alt="Belajar Bahasa Isyarat">
+        </a>
+        <div class="popular-title">Belajar Bahasa Isyarat</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Kotak 2: Placeholder (Agenda, FAQ, Ulasan nanti) -->
+    <div style="background-color: #e6f4ff; border-radius: 12px; padding: 20px;">
+      <h2 style="color: #1e70bf;">🗓 Agenda</h2>
+      <p>Akan Datang!</p>
+	 <p> 1. Panggung Boneka Tangan - <mark>3 Mei 2025</mark></p>
+	 <p> 2. Dongeng Musikal - <mark>16 Agustus 2025</mark></p>
+	 <p> 3. Penampilan Sanggar Tari - <mark>20 September 2025</mark></p>
+	 <p> 4. Boneka Ajaib Bercerita - <mark>12 Oktober 2025</mark></p>
+	  
+	 <p>Sudah Berlalu~</p>
+	 <p> 1. Origami Cerita - <mark>21 Desember 2024</mark></p>
+	 <p> 2. Kontes Menggambar dan Mewarnai - <mark>16 Agustus 2024</mark></p>
+    </div>
+
+    <!-- Kotak 3: Placeholder -->
+    <div style="background-color: #fff9ec; border-radius: 12px; padding: 20px;">
+      <h2 style="color: #ff9933;">❓ FAQ</h2>
+      <p>Q: Apa itu Toastiary?
+	  <p>A: Toastiary itu perpustakaan online buat anak-anak umur 5–12 tahun. Kamu bisa baca buku digital, nonton video seru, sampai ngobrol sama pustakawan. Semuanya bisa diakses dari rumah!
+	  <p>Q: Gimana cara cari buku di katalog online (OPAC)?
+	  <p>A: Kamu tinggal buka menu OPAC/Katalog Online, terus ketik aja judul buku, nama penulis, atau topik yang kamu cari. Klik cari, lalu pilih deh buku yang kamu suka.
+	  <p>Q: Boleh kasih saran buku ke Toastiary gak?
+	  <p>A: Boleh banget! Kamu bisa kirim saran lewat fitur ask-tiary atau isi form saran di halaman kontak kami. Kami senang banget denger ide dari kalian~</p>
+    </div>
+
+    <!-- Kotak 4: Placeholder -->
+	<div class="container">
+    <div class="section">
+      <div class="section-title">Ulasan Pengguna</div>
+      <div class="review">"Wah! aku suka baca disini karena bukunya bagus-bagus sekali"</div>
+      <div class="review">"Aku jadi tau tentang banyak hewan, senang sekali hihi"</div>
+	    <div class="review">Karena sering membaca aku jadi dipuji oleh mama dan guru:)</div>
+      <div class="review">"Terima kasih toastiary sudah menyediakan buku untuk teman tuli, temanku jadi bersemangat untuk terus membaca"</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pojok Informasi</div>
+      <div class="info-box">Jangan lupa untuk terus pantau Toastiary untuk ikuti kegiatan seru dan menangkan hadiahnya!</div>
+    </div>
+  </div>
+</div>
+	
+  <button class="asktiary-button" onclick="alert('This page will be available soon!')">
+    Ask Tiary
+  </button>
+
+  <script>
+    let currentIndex = 0;
+    function moveSlide(step) {
+      const slides = document.getElementById('carouselSlides');
+      const total = slides.children.length;
+      currentIndex = (currentIndex + step + total) % total;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+    setInterval(() => moveSlide(1), 5000);
+    // Setelah 3 detik, sembunyikan preloader dan tampilkan konten utama
+    window.addEventListener("load", function() {
+      setTimeout(function() {
+        document.getElementById("preloader").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      }, 3000); // 3000 = 3 detik
+    });
+  </script>
+  <script>
+  const talkbackBtn = document.getElementById("talkback-btn");
+
+  talkbackBtn.addEventListener("click", () => {
+    const teks = ambilTeksHalaman(); // Fungsi ambil teks dari halaman
+    bacaTeks(teks);
+  });
+
+  function ambilTeksHalaman() {
+    // Ambil semua teks dari body (bisa kamu sesuaikan agar hanya elemen tertentu)
+    return document.body.innerText;
+  }
+
+  function bacaTeks(teks) {
+    const utterance = new SpeechSynthesisUtterance(teks);
+    utterance.lang = 'id-ID'; // Bahasa Indonesia
+    speechSynthesis.cancel(); // Hentikan jika sedang membaca
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+  
+  <footer>
+    <div class="footer-container">
+
+      <div class="footer-column footer-logo">
+        <img src="images/logo.png" alt="Toastiary" style="width:70px; height: auto;">
+        <p>Jl. Imam Bonjol No.177, Pendrikan Kidul, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50131</p>
+      </div>
+   
+      <div class="footer-column">
+        <h3>Informasi</h3>
+        <a href="#">Event</a>
+        <a href="#">Koleksi</a>
+		<a href="#">Layanan</a>
+        <a href="#">Asktiary</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Hubungi Kami</h3>
+        <p>📱 (024) 486-458</p>
+        <p>📧 toastiary@gmail.com</p>
+        <h3>Ikuti Kami</h3>
+        <div class="social-icons">
+          <img src="https://cdn-icons-png.flaticon.com/128/3670/3670147.png" alt="YT">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG">
+          <img src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="X">
+          <img src="https://cdn-icons-png.flaticon.com/128/4782/4782345.png" alt="Tiktok">
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Download Apps</h3>
+        <div class="store-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2023 Toastiary: Every Toast Whisper a Tales
+    </div>
+  </footer>
+  
+</body>
+</html>
