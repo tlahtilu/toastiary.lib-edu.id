@@ -1,107 +1,81 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Toastiary - Perpustakaan Ramah Anak</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Styling preloader */
-    #preloader {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #fff9ec;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 9999;
+    /* === GLOBAL STYLES === */
+    :root {
+      --primary: #7b1fa2;
+      --secondary: #ff9933;
+      --accent: #d580ff;
+      --light-bg: #fff9ec;
+      --dark-text: #1B2E5A;
     }
-
-    #preloader h1 {
-      font-size: 48px;
-      color: #1e70bf;
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
     }
-
-    #preloader p {
-      color: #777;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-.popular-img {
-  width: 100%;
-  height: 180px; /* Atur tinggi seragam */
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-.popular-img:hover {
-  transform: scale(1.05);
-}
-.popular-img:active {
-  transform: scale(0.95);
-}
-.popular-title {
-  text-align: center;
-  font-size: 13px;
-  font-weight: bold;
-  margin-top: 5px;
-  color: #d63384;
-}
-
-
-    /* Sembunyikan konten utama dulu */
-    #main-content {
-      display: none;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-    }
-
+    
     body {
       margin: 0;
       font-family: 'Segoe UI', cursive, sans-serif;
       background: #a6c1ee;
       color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
+    
+    /* === HEADER STYLES === */
     header {
       background-image: url('https://i.pinimg.com/1200x/ec/6e/e6/ec6ee68fd4dda74e6a27082ecaafce24.jpg');
+      background-size: cover;
       padding: 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-	  height: 80px;
+      height: 80px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
+    
     header img {
       height: 70px;
     }
+    
+    /* === NAVIGATION === */
     nav {
       background-color: #003366;
     }
+    
     nav ul {
       list-style: none;
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
     }
+    
     nav ul li {
       position: relative;
     }
+    
     nav ul li a {
       display: block;
       padding: 1rem 1.5rem;
       text-decoration: none;
       color: white;
       background-color: #003366;
+      transition: all 0.3s;
     }
+    
     nav ul li:hover > a {
       background-color: #004080;
     }
+    
     nav ul li ul {
       position: absolute;
       top: 100%;
@@ -109,35 +83,79 @@
       background-color: #004080;
       display: none;
       z-index: 10;
+      min-width: 200px;
     }
+    
     nav ul li:hover ul {
       display: block;
     }
-    nav ul li ul li a {
-      padding: 0.75rem 1.5rem;
-      white-space: nowrap;
+    
+    /* === PRELOADER === */
+    #preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
     }
+    
+    #preloader h1 {
+      font-size: 48px;
+      color: #1e70bf;
+      margin: 20px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    #preloader p {  /* tulisan tagline */
+      color: #white;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    
+    #preloader img {
+      width: 200px;
+      height: auto;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* === CAROUSEL === */
+    .carousel-wrapper { /* jarak banner */
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    
     .carousel {
       position: relative;
-      max-width: 60%;
+      width: 80%;
+      max-width: 800px;
       overflow: hidden;
-      margin-bottom: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
-	.carousel-wrapper {
-	  display: flex;
-	  justify-content: center;
-	  margin-top: 2rem;
-	}
-	.slides {
+    
+    .slides {
       display: flex;
       transition: transform 0.5s ease-in-out;
     }
+    
     .slides img {
       min-width: 100%;
       height: auto;
-	  object-fit: cover;
-	  transition:opacity 0.5s ease;
+      object-fit: cover;
     }
+    
     .carousel-buttons {
       position: absolute;
       top: 50%;
@@ -146,40 +164,156 @@
       justify-content: space-between;
       transform: translateY(-50%);
     }
-    .carousel-buttons button {
+    
+    .carousel-buttons button { /* jarak button */
       background-color: rgba(0, 0, 0, 0.3);
       border: none;
       color: white;
       font-size: 2rem;
       cursor: pointer;
       padding: 0 1rem;
+      height: 60px;
+      transition: all 0.3s;
     }
-    .asktiary-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #ff9933;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 25px;
-      font-size: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    
+    .carousel-buttons button:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    /* === MAIN CONTENT GRID === */
+    #main-content { /* kotakan 4 */
+      display: none;
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      color: var(--dark-text);
+    }
+    
+    /* === ORIGINAL STYLES FOR KOLEKSI, AGENDA, FAQ, ULASAN === */
+    .popular-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
       cursor: pointer;
-      z-index: 100;
     }
-    .asktiary-button:hover {
-      background-color: #ff8000;
+    
+    .popular-img:hover {
+      transform: scale(1.05);
     }
-	{
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    
+    .popular-img:active {
+      transform: scale(0.95);
     }
-	.section {
+    
+    .popular-title {
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      margin-top: 5px;
+      color: #d63384;
+    }
+    
+    .container { /* panjang kotakan */
+      width: 450px;
+      background-color: #e0e7ff;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+	
+	/* FAQ Box Styles */
+    .faq-container {
+      background-color: #fff9ec;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .faq-item {
+      background-color: #f0e6ff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 5px solid #7b1fa2;
+    }
+    .faq-question {
+      font-weight: bold;
+      color: #7b1fa2;
+      margin-bottom: 8px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .faq-question::before {
+      content: "❓";
+      margin-right: 8px;
+      font-size: 18px;
+    }
+	.faq-answer {
+      color: #333;
+      font-size: 14px;
+      line-height: 1.5;
+      padding-left: 26px;
+    }
+    
+    .faq-answer::before {
+      content: "💡";
+      margin-right: 5px;
+    }
+    
+    /* Agenda Styles */
+    .agenda-container {
+      background-color: #e6f4ff;
+      border-radius: 12px;
+      padding: 20px;
+    }
+	.agenda-period {
+      font-weight: bold;
+      color: #1e70bf;
+      margin: 15px 0 8px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .agenda-period::before {
+      content: "📅";
+      margin-right: 8px;
+    }
+	.agenda-event {
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+	.event-date {
+      background-color: #ffeb3b;
+      color: #1e3a8a;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+      margin-left: 10px;
+    }
+    .section { /* bagian ulasan */
       margin-bottom: 25px;
     }
-
+    
     .section-title {
       font-size: 18px;
       font-weight: bold;
@@ -188,13 +322,13 @@
       display: flex;
       align-items: center;
     }
-
+    
     .section-title::before {
       content: "📌";
       margin-right: 8px;
     }
-
-    .review {
+    
+    .review { /* bagian petakan ulasan */
       background-color: #c7d2fe;
       color: #1e293b;
       padding: 12px;
@@ -202,8 +336,8 @@
       margin-bottom: 10px;
       font-size: 14px;
     }
-
-    .info-box {
+    
+    .info-box { /* bagian pojok informasi */
       background-color: #dbeafe;
       padding: 12px;
       border-radius: 8px;
@@ -212,83 +346,456 @@
       display: flex;
       align-items: center;
     }
-
-  .container {
-      width: 450px;
-      background-color: #e0e7ff;
-      border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    
+    /* === TEAM SECTION === */
+    .team-section { /* kawan perpus */
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    .team-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .team-header h2 {
+      color: #2c3e50;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .team-member {
+      background-color: white;
       padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s;
     }
+    
+    .team-member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .member-photo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      background-color: #eee;
+      overflow: hidden;
+    }
+    
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .member-info {
+      flex: 1;
+    }
+    
+    .member-name {
+      font-weight: bold;
+      font-size: 16px;
+      color: #2c3e50;
+      margin-bottom: 3px;
+    }
+    
+    .member-subname {
+      font-weight: bold;
+      color: #3498db;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+    
+    .member-position {
+      color: #7f8c8d;
+      font-size: 13px;
+    }
+    
+    /* === CHILD-FRIENDLY FEATURES === */
+    #talkback-btn { /* fitur talkback */
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      background-color: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 100;
+      transition: all 0.3s;
+    }
+    
+    #talkback-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .asktiary-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--secondary);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+    }
+    
+    .asktiary-button:hover {
+      background-color: #ff8000;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    .asktiary-button::before {
+      content: "💬";
+      margin-right: 8px;
+      font-size: 18px;
+    }
+    
+    .floating-character { /* tiary ngambang */
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      width: 80px;
+      z-index: 90;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* === FOOTER === */
     footer {
-      background: #d580ff;
+      background: var(--accent);
       color: #000;
-      padding: 40px 60px;
+      padding: 40px 0 0;
+      width: 100%;
+      margin-top: auto;
     }
-
+    
     .footer-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-
+    
     .footer-column {
       flex: 1 1 200px;
       min-width: 200px;
+      margin-bottom: 30px;
+      padding: 0 15px;
     }
-
+    
     .footer-logo img {
       height: 50px;
       margin-bottom: 10px;
     }
-
+    
     .footer-column h3 {
       font-size: 16px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      color: #000;
     }
-
+    
     .footer-column a,
     .footer-column p {
       font-size: 14px;
       color: #000;
       text-decoration: none;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: block;
+      transition: all 0.3s;
     }
-
+    
     .footer-column a:hover {
+      color: var(--primary);
       text-decoration: underline;
+      transform: translateX(5px);
     }
-
-    .social-icons img,
+    
+    .social-icons { /* medsos */
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      width: 54px;
+      height: 32px;
+      transition: transform 0.3s;
+    }
+    
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+    
+    .social-icons img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .store-icons { /* google play */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
     .store-icons img {
-      height: 30px;
-      margin-right: 10px;
+      height: 40px;
+      width: auto;
     }
-
+    
     .footer-bottom {
       text-align: center;
-      padding-top: 20px;
+      padding: 15px;
       font-size: 13px;
+      background-color: rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+      }
+      
+      header img {
+        margin-bottom: 10px;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      nav ul li ul {
+        position: static;
+        display: none;
+        width: 100%;
+      }
+      
+      .carousel {
+        width: 95%;
+      }
+      
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .container {
+        width: 100%;
+      }
+      
+      .floating-character {
+        width: 60px;
+        bottom: 70px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #preloader h1 {
+        font-size: 32px;
+      }
+      
+      .carousel-buttons button {
+        font-size: 1.5rem;
+        height: 50px;
+      }
+    }
+	/* Chat Modal Styles */ /* chat asktiary */
+    .chat-modal {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+      z-index: 1000;
+      overflow: hidden;
+      animation: fadeInUp 0.3s;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .chat-header {
+      background-color: #7b1fa2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .close-chat {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      height: calc(100% - 120px);
+    }
+    
+    .message {
+      margin-bottom: 15px;
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 18px;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    
+    .bot-message {
+      background-color: #e3eaf2;
+      color: #333;
+      border-bottom-left-radius: 5px;
+      align-self: flex-start;
+    }
+    
+    .user-message {
+      background-color: #7b1fa2;
+      color: white;
+      border-bottom-right-radius: 5px;
+      margin-left: auto;
+    }
+    
+    .chat-input-container {
+      display: flex;
+      padding: 10px;
+      background-color: white;
+      border-top: 1px solid #eee;
+    }
+    
+    #chat-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+    
+    #send-btn {
+      background-color: #7b1fa2;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      padding: 5px 15px;
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #aaa;
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
     }
   </style>
 </head>
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="images/avatar.png" alt="Toastiary Character">
+    <h1>Toastiary</h1>
+    <p>Every Toast - Whisper a Tales</p>
+  </div>
+
+  <!-- Header -->
   <header>
-    <img src="images/logo.png" alt="Toastiary Logo" />
+    <img src="images/logo.png" alt="Toastiary Logo">
     <h1>Toastiary</h1>
   </header>
+  
+  <!-- Navigation -->
   <nav>
     <ul>
       <li><a href="#">Home</a></li>
-      <li><a href="profil/profil.html">Profil</a>
-      </li>
-      <li><a href="layanan/layanan.html">Layanan</a>
-      </li>
-      <li><a href="koleksi/koleksi.html">Koleksi</a>
-      <li><a href="#">Panduan</a>
+      <li><a href="profil/profil.html">Profil</a></li>
+      <li><a href="layanan/layanan.html">Layanan</a></li>
+      <li><a href="katalog/opac.html">OPAC</a></li>
+      <li><a href="koleksi/koleksi.html">Koleksi</a></li>
+      <li>
+        <a href="#">Panduan</a>
         <ul>
           <li><a href="panduan/opac.html">Panduan OPAC</a></li>
           <li><a href="panduan/syarat.html">Syarat & Ketentuan</a></li>
@@ -296,168 +803,235 @@
         </ul>
       </li>
       <li><a href="kontak kami/kontak kami.html">Kontak Kami</a></li>
-	  </li>
       <li><a href="sign up/login sign up page.html">Sign Up</a></li>
-	  </li>
     </ul>
   </nav>
   
-	<div id="preloader">
-    <img src="images/avatar.png" style="width:200px; height: auto;">
-	<h1>Toastiary</h1>
-    <p>Every Toast - Whisper a Tales</p>
+  <!-- Main Content -->
+  <div id="main-content">
+    <!-- Carousel -->
+    <div class="carousel-wrapper">
+      <div class="carousel">
+        <div class="slides" id="carouselSlides">
+          <img src="https://i.pinimg.com/736x/54/e4/13/54e4134b5263256bc124114473af420d.jpg" alt="Banner 1">
+          <img src="https://i.pinimg.com/736x/ae/a1/1e/aea11e2e4bf6334f5554cac99f82ac7a.jpg" alt="Banner 2">
+          <img src="https://i.pinimg.com/736x/4b/c1/bb/4bc1bb495f3c44333b78952afdaf1d4d.jpg" alt="Banner 3">
+          <img src="https://i.pinimg.com/736x/cb/38/ef/cb38ef79673941b9625e9323475e65fd.jpg" alt="Banner 4">
+          <img src="https://i.pinimg.com/736x/51/d4/8e/51d48e0e64b19b1bf13ebceb60d268fc.jpg" alt="Banner 5">
+          <img src="https://i.pinimg.com/736x/24/7e/77/247e770b6574450a242c0ff87f6d1675.jpg" alt="Banner 6">
+        </div>
+        <div class="carousel-buttons">
+          <button onclick="moveSlide(-1)">&#10094;</button>
+          <button onclick="moveSlide(1)">&#10095;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Grid - Original Layout -->
+    <div class="content-grid">
+      <!-- Koleksi Populer -->
+      <div style="background-color: #fff3f3; border-radius: 12px; padding: 20px;">
+        <h2 style="color: #d63384;">📚 Koleksi Populer</h2>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <div style="width: 30%;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=3813&keywords=KKPK" target="_blank">
+                <img class="popular-img" src="https://i.pinimg.com/736x/af/8d/a2/af8da24e795c5870d94d61bce3f42178.jpg" alt="Jam Penghenti Waktu">
+              </a>
+              <div class="popular-title">Jam Penghenti Waktu</div>
+            </div>
+          </div>
+          <div style="width: 30%;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=1089&keywords=" target="_blank">
+                <img class="popular-img" src="https://i.pinimg.com/736x/1d/cc/46/1dcc46a46bd3d9d3699979fc15f47dbc.jpg" alt="Why? Disabilitas">
+              </a>
+              <div class="popular-title">Why? Disabilitas</div>
+            </div>
+          </div>
+          <div style="width: 30%;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <a href="https://bintangpusnas.perpusnas.go.id/konten/BK8328/belajar-bahasa-isyarat-untuk-anak-tunarungu-dasar" target="_blank">
+                <img class="popular-img" src="https://i.pinimg.com/736x/94/a7/6f/94a76fd353ecaa03ac7c13f60fa16bed.jpg" alt="Belajar Bahasa Isyarat">
+              </a>
+              <div class="popular-title">Belajar Bahasa Isyarat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agenda Section - Updated Version -->
+  <div class="agenda-container">
+    <h2 style="color: #1e70bf; margin-bottom: 15px;">🗓 Agenda</h2>
+    
+    <div class="agenda-period">Akan Datang</div>
+    
+    <div class="agenda-event">
+      <span>Panggung Boneka Tangan</span>
+      <span class="event-date">3 Mei 2025</span>
+    </div>
+    
+    <div class="agenda-event">
+      <span>Dongeng Musikal</span>
+      <span class="event-date">16 Agustus 2025</span>
+    </div>
+	<div class="agenda-event">
+      <span>Penampilan Sanggar Tari</span>
+      <span class="event-date">20 September 2025</span>
+    </div>
+    
+    <div class="agenda-event">
+      <span>Boneka Ajaib Bercerita</span>
+      <span class="event-date">12 Oktober 2025</span>
+    </div>
+    
+    <div class="agenda-period">Sudah Berlalu</div>
+    
+    <div class="agenda-event">
+      <span>Origami Cerita</span>
+      <span class="event-date">21 Des 2024</span>
+    </div>
 	
+	<div class="agenda-event">
+      <span>Kontes Menggambar dan Mewarnai</span>
+      <span class="event-date">16 Agu 2024</span>
+    </div>
+  </div>
+
+     <!-- FAQ Section - Updated Version -->
+  <div class="faq-container">
+    <h2 style="color: #ff9933; margin-bottom: 15px;">❓ FAQ</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question">Apa itu Toastiary?</div>
+      <div class="faq-answer">
+        Toastiary adalah perpustakaan online khusus untuk anak-anak usia 5-12 tahun. 
+        Kamu bisa membaca buku digital, menonton video edukasi, dan berinteraksi 
+        dengan pustakawan kami secara online dari rumah!
+      </div>
+    </div>
+	<div class="faq-item">
+      <div class="faq-question">Bagaimana cara mencari buku di katalog online (OPAC)?</div>
+      <div class="faq-answer">
+        Cukup buka menu OPAC/Katalog Online, lalu ketik judul buku, nama penulis, 
+        atau topik yang kamu cari. Klik tombol cari, dan pilih buku yang menarik minatmu!
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Bolehkah memberikan saran buku untuk Toastiary?</div>
+      <div class="faq-answer">
+        Tentu saja! Kamu bisa mengirimkan saran melalui fitur Ask Tiary atau mengisi 
+        form saran di halaman Kontak Kami. Kami sangat menghargai masukan dari pembaca kecil kami!
+		 </div>
+    </div>
+  </div>
+
+      <!-- Ulasan & Informasi -->
+      <div class="container">
+        <div class="section">
+          <div class="section-title">Ulasan Pengguna</div>
+          <div class="review">"Wah! aku suka baca disini karena bukunya bagus-bagus sekali"</div>
+          <div class="review">"Aku jadi tau tentang banyak hewan, senang sekali hihi"</div>
+          <div class="review">"Karena sering membaca aku jadi dipuji oleh mama dan guru :)"</div>
+          <div class="review">"Terima kasih toastiary sudah menyediakan buku untuk teman tuli, temanku jadi bersemangat untuk terus membaca"</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Pojok Informasi</div>
+          <div class="info-box">Jangan lupa untuk terus pantau Toastiary untuk ikuti kegiatan seru dan menangkan hadiahnya!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="team-section">
+      <div class="team-header">
+        <h2>KAWAN PERPUS</h2>
+      </div>
+
+      <div class="team-container">
+        <div class="team-member">
+          <div class="member-photo">
+            <img src="https://i.pinimg.com/736x/f0/bd/39/f0bd3957f7bfeb0f25ac9c689e71fba4.jpg" alt="Mazaya Nailah Shabrina">
+          </div>
+          <div class="member-info">
+            <div class="member-name">Mazaya Nailah Shabrina</div>
+            <div class="member-subname">Mazaya</div>
+            <div class="member-position">Kesekretariatan</div>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="member-photo">
+            <img src="https://i.pinimg.com/736x/50/44/37/504437721ef50271883fb9644f00dae9.jpg" alt="Rizqyana Maryamah">
+          </div>
+          <div class="member-info">
+            <div class="member-name">Rizqyana Maryamah</div>
+            <div class="member-subname">Yana</div>
+            <div class="member-position">Departemen Kreatif</div>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="member-photo">
+            <img src="https://i.pinimg.com/736x/3e/6f/02/3e6f027d36ebf9ec50d9f8e16c5282cd.jpg" alt="Tri Lestari Agustina H.">
+          </div>
+          <div class="member-info">
+            <div class="member-name">Tri Lestari Agustina H.</div>
+            <div class="member-subname">Aya</div>
+            <div class="member-position">Pustakawan</div>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="member-photo">
+            <img src="https://i.pinimg.com/736x/d1/0f/82/d10f8214e4f7f445f1b6fa9209d8573f.jpg" alt="Salmah Ayu">
+          </div>
+          <div class="member-info">
+            <div class="member-name">Salmah Ayu Putri M.</div>
+            <div class="member-subname">Salmah</div>
+            <div class="member-position">Koordinator TI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Child-Friendly Features -->
+  <div id="talkback-btn" title="Baca Halaman Ini">
+    🔊
   </div>
   
- <!-- Tambahkan wrapper untuk center -->
-<div style="display: flex; justify-content: center; margin-top: 2rem;">
-  <div class="carousel">
-    <div class="slides" id="carouselSlides">
-      <img src="https://i.pinimg.com/736x/54/e4/13/54e4134b5263256bc124114473af420d.jpg" alt="Banner 1">
-      <img src="https://i.pinimg.com/736x/ae/a1/1e/aea11e2e4bf6334f5554cac99f82ac7a.jpg" alt="Banner 2">
-      <img src="https://i.pinimg.com/736x/4b/c1/bb/4bc1bb495f3c44333b78952afdaf1d4d.jpg" alt="Banner 3">
-      <img src="https://i.pinimg.com/736x/cb/38/ef/cb38ef79673941b9625e9323475e65fd.jpg" alt="Banner 4">
-      <img src="https://i.pinimg.com/736x/51/d4/8e/51d48e0e64b19b1bf13ebceb60d268fc.jpg" alt="Banner 5">
-      <img src="https://i.pinimg.com/736x/24/7e/77/247e770b6574450a242c0ff87f6d1675.jpg" alt="Banner 6">
-    </div>
-    <div class="carousel-buttons">
-      <button onclick="moveSlide(-1)">&#10094;</button>
-      <button onclick="moveSlide(1)">&#10095;</button>
-    </div>
-  </div>
-</div>
-
-	<div id="talkback-btn" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
-	  🔊
-	</div>
-
-
-<!-- Konten 2x2 Grid di bawah Banner -->
-<div id="main-content">
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1000px; margin: 3rem auto; color: black;">
-    <!-- Kotak 1: Koleksi Populer -->
-   <!-- Kotak 1: Koleksi Populer -->
-<!-- Kotak 1: Koleksi Populer -->
-<div style="background-color: #fff3f3; border-radius: 12px; padding: 20px;">
-  <h2 style="color: #d63384;">📚 Koleksi Populer</h2>
-  <div style="display: flex; gap: 10px; margin-top: 10px;">
-    <div style="width: 30%;">
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=3813&keywords=KKPK" target="_blank">
-          <img class="popular-img" src="https://i.pinimg.com/736x/af/8d/a2/af8da24e795c5870d94d61bce3f42178.jpg" alt="Jam Penghenti Waktu">
-        </a>
-        <div class="popular-title">Jam Penghenti Waktu</div>
-      </div>
-    </div>
-    <div style="width: 30%;">
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=1089&keywords=" target="_blank">
-          <img class="popular-img" src="https://i.pinimg.com/736x/1d/cc/46/1dcc46a46bd3d9d3699979fc15f47dbc.jpg" alt="Why? Disabilitas">
-        </a>
-        <div class="popular-title">Why? Disabilitas</div>
-      </div>
-    </div>
-    <div style="width: 30%;">
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <a href="https://bintangpusnas.perpusnas.go.id/konten/BK8328/belajar-bahasa-isyarat-untuk-anak-tunarungu-dasar" target="_blank">
-          <img class="popular-img" src="https://i.pinimg.com/736x/94/a7/6f/94a76fd353ecaa03ac7c13f60fa16bed.jpg" alt="Belajar Bahasa Isyarat">
-        </a>
-        <div class="popular-title">Belajar Bahasa Isyarat</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-    <!-- Kotak 2: Placeholder (Agenda, FAQ, Ulasan nanti) -->
-    <div style="background-color: #e6f4ff; border-radius: 12px; padding: 20px;">
-      <h2 style="color: #1e70bf;">🗓 Agenda</h2>
-      <p>Akan Datang!</p>
-	 <p> 1. Panggung Boneka Tangan - <mark>3 Mei 2025</mark></p>
-	 <p> 2. Dongeng Musikal - <mark>16 Agustus 2025</mark></p>
-	 <p> 3. Penampilan Sanggar Tari - <mark>20 September 2025</mark></p>
-	 <p> 4. Boneka Ajaib Bercerita - <mark>12 Oktober 2025</mark></p>
-	  
-	 <p>Sudah Berlalu~</p>
-	 <p> 1. Origami Cerita - <mark>21 Desember 2024</mark></p>
-	 <p> 2. Kontes Menggambar dan Mewarnai - <mark>16 Agustus 2024</mark></p>
-    </div>
-
-    <!-- Kotak 3: Placeholder -->
-    <div style="background-color: #fff9ec; border-radius: 12px; padding: 20px;">
-      <h2 style="color: #ff9933;">❓ FAQ</h2>
-      <p>Q: Apa itu Toastiary?
-	  <p>A: Toastiary itu perpustakaan online buat anak-anak umur 5–12 tahun. Kamu bisa baca buku digital, nonton video seru, sampai ngobrol sama pustakawan. Semuanya bisa diakses dari rumah!
-	  <p>Q: Gimana cara cari buku di katalog online (OPAC)?
-	  <p>A: Kamu tinggal buka menu OPAC/Katalog Online, terus ketik aja judul buku, nama penulis, atau topik yang kamu cari. Klik cari, lalu pilih deh buku yang kamu suka.
-	  <p>Q: Boleh kasih saran buku ke Toastiary gak?
-	  <p>A: Boleh banget! Kamu bisa kirim saran lewat fitur ask-tiary atau isi form saran di halaman kontak kami. Kami senang banget denger ide dari kalian~</p>
-    </div>
-
-    <!-- Kotak 4: Placeholder -->
-	<div class="container">
-    <div class="section">
-      <div class="section-title">Ulasan Pengguna</div>
-      <div class="review">"Wah! aku suka baca disini karena bukunya bagus-bagus sekali"</div>
-      <div class="review">"Aku jadi tau tentang banyak hewan, senang sekali hihi"</div>
-	    <div class="review">Karena sering membaca aku jadi dipuji oleh mama dan guru:)</div>
-      <div class="review">"Terima kasih toastiary sudah menyediakan buku untuk teman tuli, temanku jadi bersemangat untuk terus membaca"</div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Pojok Informasi</div>
-      <div class="info-box">Jangan lupa untuk terus pantau Toastiary untuk ikuti kegiatan seru dan menangkan hadiahnya!</div>
-    </div>
-  </div>
-</div>
-	
-  <button class="asktiary-button" onclick="alert('This page will be available soon!')">
+  <img src="images/avatar.png" alt="Friendly Mascot" class="floating-character">
+  
+<!-- Ask Tiary Button -->
+  <button class="asktiary-button" id="asktiary-btn">
     Ask Tiary
   </button>
 
-  <script>
-    let currentIndex = 0;
-    function moveSlide(step) {
-      const slides = document.getElementById('carouselSlides');
-      const total = slides.children.length;
-      currentIndex = (currentIndex + step + total) % total;
-      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-    setInterval(() => moveSlide(1), 5000);
-    // Setelah 3 detik, sembunyikan preloader dan tampilkan konten utama
-    window.addEventListener("load", function() {
-      setTimeout(function() {
-        document.getElementById("preloader").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-      }, 3000); // 3000 = 3 detik
-    });
-  </script>
-  <script>
-  const talkbackBtn = document.getElementById("talkback-btn");
+  <!-- Chat Modal -->
+  <div class="chat-modal" id="chat-modal">
+    <div class="chat-header">
+      <span>Asktiary - Chatbot Perpustakaan</span>
+      <button class="close-chat" id="close-chat">×</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot-message">
+        Halo! Saya Asktiary, chatbot perpustakaan Toastiary. Ada yang bisa saya bantu?
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <input type="text" id="chat-input" placeholder="Ketik pesan Anda..." autocomplete="off">
+      <button id="send-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
 
-  talkbackBtn.addEventListener("click", () => {
-    const teks = ambilTeksHalaman(); // Fungsi ambil teks dari halaman
-    bacaTeks(teks);
-  });
-
-  function ambilTeksHalaman() {
-    // Ambil semua teks dari body (bisa kamu sesuaikan agar hanya elemen tertentu)
-    return document.body.innerText;
-  }
-
-  function bacaTeks(teks) {
-    const utterance = new SpeechSynthesisUtterance(teks);
-    utterance.lang = 'id-ID'; // Bahasa Indonesia
-    speechSynthesis.cancel(); // Hentikan jika sedang membaca
-    speechSynthesis.speak(utterance);
-  }
-</script>
-
-  
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
-
       <div class="footer-column footer-logo">
         <img src="images/logo.png" alt="Toastiary" style="width:70px; height: auto;">
         <p>Jl. Imam Bonjol No.177, Pendrikan Kidul, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50131</p>
@@ -466,8 +1040,8 @@
       <div class="footer-column">
         <h3>Informasi</h3>
         <a href="#">Event</a>
-        <a href="#">Koleksi</a>
-		<a href="#">Layanan</a>
+        <a href="koleksi/koleksi.html">Koleksi</a>
+        <a href="#">Layanan</a>
         <a href="#">Asktiary</a>
       </div>
 
@@ -477,27 +1051,187 @@
         <p>📧 toastiary@gmail.com</p>
         <h3>Ikuti Kami</h3>
         <div class="social-icons">
-          <img src="https://cdn-icons-png.flaticon.com/128/3670/3670147.png" alt="YT">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG">
-          <img src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="X">
-          <img src="https://cdn-icons-png.flaticon.com/128/4782/4782345.png" alt="Tiktok">
+          <a href="https://youtube.com/@toastiary?si=vjEO6lYG86fKR_ih" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/128/3670/3670147.png" alt="YouTube">
+          </a>
+          <a href="https://www.instagram.com/toastiary?igsh=MXBubWpsa3d3bHo5" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="https://x.com/toastiary?t=qwxKhYBYwFnKmF-Qo5dsGA&s=08" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="Twitter">
+          </a>
+          <a href="https://www.tiktok.com/@toastiary?_t=ZS-8weDgipkojQ&_r=1" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/128/4782/4782345.png" alt="TikTok">
+          </a>
         </div>
       </div>
 
       <div class="footer-column">
         <h3>Download Apps</h3>
         <div class="store-icons">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+          <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store"></a>
+          <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store"></a>
         </div>
       </div>
-
     </div>
 
     <div class="footer-bottom">
       &copy; 2023 Toastiary: Every Toast Whisper a Tales
     </div>
   </footer>
-  
+
+ <script>
+    // Carousel functionality
+    let currentIndex = 0;
+    const slides = document.getElementById('carouselSlides');
+    const totalSlides = slides.children.length;
+    
+    function moveSlide(step) {
+      currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+    
+    // Auto-rotate carousel
+    setInterval(() => moveSlide(1), 5000);
+    
+    // Preloader
+    window.addEventListener("load", function() {
+      setTimeout(function() {
+        document.getElementById("preloader").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      }, 3000);
+    });
+    
+    // Talkback functionality
+    const talkbackBtn = document.getElementById("talkback-btn");
+    
+    talkbackBtn.addEventListener("click", () => {
+      const pageText = getPageText();
+      readText(pageText);
+    });
+    
+    function getPageText() {
+      // Get text from main content areas only
+      const mainContent = document.getElementById('main-content').innerText;
+      return mainContent;
+    }
+    
+    function readText(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID';
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Text-to-speech tidak didukung di browser Anda');
+      }
+    }
+    
+    // Ask Tiary button - diubah untuk membuka modal chat
+    const askTiaryBtn = document.getElementById('asktiary-btn');
+    askTiaryBtn.addEventListener('click', function() {
+      document.getElementById('chat-modal').style.display = 'block';
+    });
+    
+    // Floating character animation
+    const character = document.querySelector('.floating-character');
+    let floatDirection = 1;
+    
+    setInterval(() => {
+      const currentTop = parseInt(window.getComputedStyle(character).getPropertyValue('bottom'));
+      if (currentTop > 100) floatDirection = -1;
+      if (currentTop < 70) floatDirection = 1;
+      character.style.bottom = (currentTop + floatDirection) + 'px';
+    }, 100);
+
+    // Chatbot functionality
+    const chatModal = document.getElementById('chat-modal');
+    const closeChatBtn = document.getElementById('close-chat');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    
+    // Responses for the chatbot
+    const botResponses = {
+      "halo": "Halo! Ada yang bisa saya bantu terkait perpustakaan Toastiary?",
+      "hi": "Hai! Ada yang bisa saya bantu hari ini?",
+      "jam buka": "Perpustakaan buka setiap hari pukul 08.00-16.00 WIB",
+      "jam layanan": "Layanan perpustakaan tersedia pukul 08.00-16.00 WIB setiap hari",
+      "pinjam buku": "Peminjaman buku dilakukan selama 7 hari dan akan otomatis dikembalikan oleh sistem. Tidak ada denda keterlambatan.",
+      "lama pinjam": "Buku dapat dipinjam selama 7 hari dan akan otomatis dikembalikan oleh sistem",
+      "denda": "Tidak ada denda keterlambatan karena sistem kami otomatis mengembalikan buku setelah 7 hari",
+      "syarat anggota": "Syarat menjadi anggota: cukup login menggunakan email Anda",
+      "terima kasih": "Sama-sama! Jangan ragu bertanya lagi ya",
+      "default": "Maaf, saya tidak mengerti pertanyaan Anda. Coba tanyakan tentang: jam buka, cara pinjam buku, atau syarat menjadi anggota."
+    };
+    
+    // Toggle chat modal
+    closeChatBtn.addEventListener('click', function() {
+      chatModal.style.display = 'none';
+    });
+    
+    // Add message to chat
+    function addMessage(text, isUser) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message');
+      messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Show typing indicator
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.classList.add('typing-indicator');
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return typingDiv;
+    }
+    
+    // Process user input
+    function processMessage() {
+      const message = chatInput.value.trim();
+      if (message === '') return;
+      
+      // Add user message
+      addMessage(message, true);
+      chatInput.value = '';
+      
+      // Show typing indicator
+      const typing = showTyping();
+      
+      // Simulate bot thinking
+      setTimeout(() => {
+        // Remove typing indicator
+        chatMessages.removeChild(typing);
+        
+        // Find appropriate response
+        const lowerMessage = message.toLowerCase();
+        let response = botResponses.default;
+        
+        for (const [key, value] of Object.entries(botResponses)) {
+          if (lowerMessage.includes(key)) {
+            response = value;
+            break;
+          }
+        }
+        
+        // Add bot response
+        addMessage(response, false);
+      }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+    }
+    
+    // Event listeners
+    sendBtn.addEventListener('click', processMessage);
+    chatInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') processMessage();
+    });
+  </script>
 </body>
 </html>

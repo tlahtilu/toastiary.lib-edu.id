@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <!-- Menandakan bahwa ini adalah dokumen HTML5 -->
+<html lang="en"> <!-- Bahasa utama dari dokumen ini adalah Inggris -->
 <head>
-  <meta charset="UTF-8">
-  <title>Layanan Toastiary</title>
+  <meta charset="UTF-8"> <!-- Mengatur encoding karakter -->
+  <title>Layanan Toastiary</title> <!-- Judul yang tampil di tab browser -->
 
   <style>
+    /* Variabel warna disimpan di :root agar bisa digunakan berulang kali */
     :root {
       --sky-blue: #fbc2eb;
       --lavender-purple: #a6c1ee;
@@ -15,11 +16,11 @@
     }
 
 	body {
-	  font-family: 'Segoe UI', sans-serif;
-	  background: linear-gradient(to right, var(--sky-blue), var(--lavender-purple));
+	  font-family: 'Segoe UI', sans-serif; /* Jenis font utama halaman */
+	  background: linear-gradient(to right, var(--sky-blue), var(--lavender-purple)); /* Gradasi background */
 	  margin: 0;
 	  padding: 0;
-	  overflow-x: hidden; 
+	  overflow-x: hidden; /* Supaya tidak ada scroll ke samping */
 	}
 
     .profil-header {
@@ -32,29 +33,29 @@
       margin-top: 30px;
       margin-bottom: 30px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      animation: fadeIn 1.5s ease-in-out;
+      animation: fadeIn 1.5s ease-in-out; /* Efek muncul halus */
     }
 
     .back-button {
-      position: fixed;
+      position: fixed; /* Tombol selalu berada di posisi yang sama */
       top: 20px;
       left: 20px;
       width: 50px;
       height: 50px;
       background-color: white;
       border: none;
-      border-radius: 50%;
+      border-radius: 50%; /* Membuat tombol bulat */
       font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      z-index: 1000;
+      z-index: 1000; /* Supaya berada di atas elemen lain */
     }
 
     .back-button:hover {
-      background-color: #2980b9;
+      background-color: #2980b9; /* Efek hover berubah warna */
     }
 
     .back-button img {
@@ -70,11 +71,11 @@
       margin-bottom: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
+      cursor: pointer; /* Menunjukkan elemen bisa diklik */
     }
 
     .product-box:hover {
-      transform: scale(1.03);
+      transform: scale(1.03); /* Membesar sedikit saat dihover */
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
@@ -83,31 +84,31 @@
     }
 
     .product-info {
-      color: white;
+      color: white; /* Warna teks utama dalam kotak produk */
     }
 
     .photo-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
+      display: grid; /* Layout gambar pakai grid */
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ukuran kolom fleksibel */
+      gap: 10px; /* Jarak antar gambar */
       margin-top: 10px;
     }
 
     .photo-gallery img {
       width: 70%;
       height: auto;
-      border-radius: 8px;
+      border-radius: 8px; /* Sudut gambar melengkung */
       border: 1px solid #ccc;
       transition: transform 0.2s;
     }
 
     .photo-gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.05); /* Efek zoom saat hover */
     }
 
     .table-container {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto; /* Elemen berada di tengah */
     }
 
     footer {
@@ -127,8 +128,9 @@
   </style>
 </head>
 <body>
-  <div class="profil-header">Layanan</div>
+  <div class="profil-header">Layanan</div> <!-- Header judul halaman -->
 
+  <!-- LAYANAN 1: Sirkulasi -->
   <div class="table-container">
     <div class="product-box" onclick="animateBox(this)">
       <div class="product-info">
@@ -138,12 +140,14 @@
     </div>
   </div>
 
+  <!-- LAYANAN 2: Referensi -->
   <div class="table-container">
     <div class="product-box" onclick="animateBox(this)">
       <div class="product-info">
         <h3 style="text-align: center; color: #ffe6ff">Layanan Referensi</h3>
         <p>Layanan Referensi di Toastiary menyajikan kamus dan atlas digital yang bisa dibaca langsung lewat HP, tablet, atau komputer. Kamus bantu kamu cari arti kata, dan atlas tunjukin peta dunia serta tempat-tempat dan informasi menarik. Gampang, seru, dan bisa diakses kapan aja dari rumah! Contoh koleksinya seperti ini.</p>
 
+        <!-- Galeri gambar koleksi referensi -->
         <div class="photo-gallery">
           <img src="https://i.pinimg.com/736x/1c/55/3e/1c553e399dd59d3fb5d18d4d5022372b.jpg" alt="Atlas Dinosaurus">
           <img src="https://i.pinimg.com/736x/ff/b3/53/ffb353168b2d665763d032c7570749da.jpg" alt="Kamus Kendaraan">
@@ -156,6 +160,7 @@
     </div>
   </div>
 
+  <!-- LAYANAN 3: Akses Internet dan Komputer -->
   <div class="table-container">
     <div class="product-box" onclick="animateBox(this)">
       <div class="product-info">
@@ -166,6 +171,7 @@
   </div>
 
   <script>
+    // Fungsi JavaScript untuk efek animasi saat box diklik
     function animateBox(box) {
       box.style.transform = "scale(1.07)";
       setTimeout(() => {
@@ -174,10 +180,12 @@
     }
   </script>
 
+  <!-- Tombol kembali ke halaman index -->
   <button class="back-button" onclick="window.location.href='../index.html'">
     <img src="https://img.icons8.com/?size=80&id=uXxiRTNgkmaS&format=png" alt="Back">
   </button>
 
+  <!-- Bagian bawah halaman -->
   <footer>
     <p>&copy; 2023 Toastiary: Every Toast Whisper a Tales</p>
   </footer>

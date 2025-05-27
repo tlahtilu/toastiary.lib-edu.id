@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+<!-- Catatan 1: Deklarasi tipe dokumen HTML5 -->
 <html lang="id">
+<!-- Catatan 2: Atribut lang="id" menunjukkan bahasa Indonesia -->
 <head>
+  <!-- Catatan 3: Meta charset untuk encoding karakter UTF-8 -->
   <meta charset="UTF-8" />
+  <!-- Catatan 4: Viewport untuk responsive design di mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Catatan 5: Judul halaman yang muncul di tab browser -->
   <title>Toastiary - Koleksi Buku</title>
   <style>
+    /* Catatan 6: Styling dasar untuk body dengan gradient background */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -12,6 +18,7 @@
       color: #1B2E5A;
     }
 	
+	/* Catatan 7: Styling header dengan animasi fadeIn */
 	.profil-header {
 	  text-align: center;
 	  background-color:  #7b1fa2;
@@ -26,11 +33,13 @@
 	  animation: fadeIn 1.5s ease-in-out;
 	}
 
+    /* Catatan 8: Styling untuk search bar */
     .search-bar {
       text-align: center;
       margin: 30px 0;
     }
 
+    /* Catatan 9: Styling input search dengan border orange */
     .search-bar input {
       padding: 15px 25px;
       width: 400px;
@@ -40,6 +49,7 @@
       outline: none;
     }
 
+    /* Catatan 10: Tombol search dengan efek hover */
     .search-bar button {
       padding: 15px 20px;
       background-color: #ffa64d;
@@ -56,10 +66,7 @@
 	  transform: scale(1.05);
 	}
 
-	search-bar button:active {
-	  transform: scale(0.95);
-	}
-
+	/* Catatan 11: Tombol back dengan posisi fixed */
 	.back-button {
       position: fixed;
       top: 20px;
@@ -88,6 +95,7 @@
       height: 24px;
     }
 
+    /* Catatan 12: Styling cover buku dengan efek hover */
     .book-cover {
       height: 250px;
       object-fit: cover;
@@ -96,11 +104,8 @@
     .book-cover:hover {
       transform: scale(1.03);
     }
-    .search-box {
-      max-width: 600px;
-      margin: 0 auto 40px;
-    }
 
+    /* Catatan 13: Judul section dengan warna orange */
     .section-title {
       text-align: center;
       font-size: 2rem;
@@ -108,6 +113,7 @@
       color: #e26d00;
     }
 
+    /* Catatan 14: Grid layout untuk menampilkan buku */
     .book-grid {
       display: flex;
       flex-wrap: wrap;
@@ -116,6 +122,7 @@
       justify-content: center;
     }
 
+    /* Catatan 15: Card untuk setiap buku dengan efek hover */
     .book-card {
       background-color: #FFF8F0;
       border-radius: 20px;
@@ -137,6 +144,7 @@
       margin-bottom: 10px;
     }
 
+    /* Catatan 16: Tombol aksi (like, comment, bookmark) */
     .buttons {
       display: flex;
       justify-content: space-around;
@@ -155,6 +163,7 @@
       transform: scale(1.2);
     }
 	
+    /* Catatan 17: Footer dengan warna ungu */
     footer {
       background-color:  #7b1fa2;
 	  display: flex;
@@ -171,23 +180,27 @@
   </style>
 </head>
 <body>
+  <!-- Catatan 18: Tombol back ke halaman utama -->
   <button class="back-button" onclick="window.location.href='../index.html'">
     <img src="https://img.icons8.com/?size=80&id=uXxiRTNgkmaS&format=png" alt="Back">
     <i class="fa fa-arrow-left"></i>
   </button>
 
+  <!-- Catatan 19: Header halaman -->
   <div class="profil-header">Koleksi</div>
 
-
+  <!-- Catatan 20: Search bar untuk mencari buku -->
   <div class="search-bar">
 	<input type="text" id="searchInput" placeholder="Cari bukumu di sini!">
 	<button onclick="cariBuku()">Cari</button>
   </div>
 	
-	
+  <!-- Catatan 21: Judul section buku tersedia -->	
   <div class="section-title">BUKU TERSEDIA</div>
 
+  <!-- Catatan 22: Container untuk grid buku -->
   <div class="book-grid">
+    <!-- Catatan 23: Contoh card buku pertama -->
     <div class="book-card"data-title="balirina">
       <img src="https://i.pinimg.com/736x/8c/2d/4e/8c2d4eee926fb4b100f2d4f58816cdee.jpg" alt="Balirina">
       Balirina
@@ -219,6 +232,8 @@
     </div>
     
     <div class="book-card"data-title="jam penghenti waktu">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+      <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=3813&keywords=KKPK" target="_blank">
       <img src="https://i.pinimg.com/736x/af/8d/a2/af8da24e795c5870d94d61bce3f42178.jpg" alt="Jam Penghenti Waktu">
       Jam Penghenti Waktu
       <div class="buttons">
@@ -227,7 +242,8 @@
         <button><i class="fa-regular fa-bookmark"></i></button>
       </div>
     </div>
-    
+	</div>
+    </a>
     <div class="book-card"data-title="the butterfly garden">
       <img src="https://i.pinimg.com/736x/18/42/b8/1842b8e14cbc6044bc4ad54467c6c417.jpg" alt="The Butterfly Garden">
       The Butterfly Garden
@@ -308,7 +324,10 @@
       </div>
     </div>
     
+    <!-- Catatan 24: Card buku dengan link eksternal -->
     <div class="book-card"data-title="why? disabilitas">
+	<div style="display: flex; flex-direction: column; align-items: center;">
+      <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=1089&keywords=" target="_blank">
       <img src="https://i.pinimg.com/736x/1d/cc/46/1dcc46a46bd3d9d3699979fc15f47dbc.jpg" alt="Why? Disabilitas">
       Why? Disabilitas
       <div class="buttons">
@@ -317,6 +336,8 @@
         <button><i class="fa-regular fa-bookmark"></i></button>
       </div>
     </div>
+	</div>
+	</a>
     
     <div class="book-card"data-title="why? ilmu pengetahuan alam">
       <img src="https://i.pinimg.com/736x/7f/f1/5d/7ff15deb554d21dd870d7b162fcd478a.jpg" alt="Why? Ilmu Pengetahuan Alam">
@@ -389,6 +410,8 @@
     </div>
     
     <div class="book-card"data-title="belajar bahasa isyarat">
+	<div style="display: flex; flex-direction: column; align-items: center;">
+      <a href="http://opac.almunawwarah.sch.id/opac/index.php?p=show_detail&id=1089&keywords=" target="_blank">
       <img src="https://i.pinimg.com/736x/94/a7/6f/94a76fd353ecaa03ac7c13f60fa16bed.jpg" alt="Belajar Bahasa Isyarat">
       Belajar Bahasa Isyarat
       <div class="buttons">
@@ -397,6 +420,8 @@
         <button><i class="fa-regular fa-bookmark"></i></button>
       </div>
     </div>
+	</div>
+	</a>
     
     <div class="book-card"data-title="komik lieur">
       <img src="https://i.pinimg.com/736x/85/45/ef/8545efc43a2ac506a7bd2230b9d0df10.jpg" alt="Komik Lieur">
@@ -429,32 +454,34 @@
     </div>
   </div>
   
+  <!-- Catatan 25: Footer halaman -->
   <footer>
     &copy; 2023 Toastiary: Every Toast Whisper a Tales
   </footer>
+  
+  <!-- Catatan 26: JavaScript untuk fungsi pencarian -->
   <script>
-function cariBuku() {
-  const keyword = document.getElementById("searchInput").value.toLowerCase();
-  const buku = document.querySelectorAll(".book-card");
+    // Catatan 27: Fungsi untuk mencari buku berdasarkan keyword
+    function cariBuku() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+      const buku = document.querySelectorAll(".book-card");
 
-  buku.forEach(function(card) {
-    const judul = card.getAttribute("data-title").toLowerCase();
-    if (judul.includes(keyword)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
+      buku.forEach(function(card) {
+        const judul = card.getAttribute("data-title").toLowerCase();
+        if (judul.includes(keyword)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
     }
-  });
-}
-</script>
-<script>
-  document.getElementById("searchInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-      cariBuku();
-    }
-  });
-</script>
-
-
+    
+    // Catatan 28: Event listener untuk tombol Enter di input search
+    document.getElementById("searchInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        cariBuku();
+      }
+    });
+  </script>
 </body>
 </html>
