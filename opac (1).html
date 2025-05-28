@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toastiary - Katalog Online (OPAC)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      /* Background gradient */
+      color: #1B2E5A;
+    }
+	
+	    /* === HEADER STYLES === */
+    header {
+      background-image: url('https://i.pinimg.com/1200x/ec/6e/e6/ec6ee68fd4dda74e6a27082ecaafce24.jpg');
+      background-size: cover;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    header img {
+      height: 70px;
+    }
+    
+    /* === NAVIGATION === */
+    nav {
+      background-color: #003366;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    nav ul li {
+      position: relative;
+    }
+    
+    nav ul li a {
+      display: block;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: white;
+      background-color: #003366;
+      transition: all 0.3s;
+    }
+    
+    nav ul li:hover > a {
+      background-color: #004080;
+    }
+    
+    nav ul li ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #004080;
+      display: none;
+      z-index: 10;
+      min-width: 200px;
+    }
+    
+    nav ul li:hover ul {
+      display: block;
+    }
+
+    .search-bar {
+      /* Style untuk search bar */
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .search-bar input {
+      /* Style input search */
+      padding: 15px 25px;
+      width: 400px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: 2px solid #ffa64d; 
+      outline: none;
+    }
+
+    .search-bar button {
+      /* Style tombol search */
+      padding: 15px 20px;
+      background-color: #ffa64d;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-left: 10px;
+      color: white;
+	  transition: all 0.3s ease;
+      /* Efek transisi halus */
+    }
+	.search-bar button:hover {
+	  transform: scale(1.05);
+	  /* Efek membesar saat hover */
+	}
+
+    .book-cover {
+      /* Style cover buku */
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+      border-radius: 15px;
+    }
+    
+    .book-cover:hover {
+      transform: scale(1.03);
+      /* Efek zoom saat hover */
+    }
+
+    .section-title {
+      /* Style judul section */
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #e26d00;
+    }
+
+    .book-container {
+      /* Container untuk grid buku */
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      padding: 0 40px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .book-card {
+      /* Style card buku */
+      background-color: #FFF8F0;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+      width: 160px;
+    }
+
+    .book-card:hover {
+      /* Efek hover card buku */
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .book-title {
+      /* Style judul buku */
+      margin: 12px 0;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1B2E5A;
+    }
+
+    .buttons {
+      /* Container tombol aksi */
+      display: flex;
+      justify-content: space-around;
+      margin: 10px 0;
+    }
+
+    .buttons button {
+      /* Style emot love, comment, bookmark */
+      background-color: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #7b1fa2;
+      transition: all 0.2s ease;
+    }
+
+    .buttons button:hover {
+      transform: scale(1.2);
+      /* Efek hover tombol aksi */
+    }
+    
+    .detail-button {
+      /* Style tombol detail */
+      margin-top: 5px;
+      padding: 8px 15px;
+      background-color: #7b1fa2;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      width: 100%;
+    }
+    
+    .detail-button:hover {
+      background-color: #6a1b9a;
+      /* Efek hover tombol detail */
+    }
+    
+    /* Modal Styles */
+    .modal {
+      /* Style detail */
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      /* Style konten modal */
+      background-color: #FFF8F0;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 20px;
+      width: 70%;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .close {
+      /* Style tombol close modal */
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover {
+      color: #7b1fa2;
+    }
+    
+    .book-detail {
+      /* Style detail buku dalam modal */
+      display: flex;
+      gap: 30px;
+    }
+    
+    .book-cover-large {
+      /* Style cover buku besar di modal */
+      width: 220px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    
+    .book-info {
+      /* Style info buku */
+      flex: 1;
+    }
+    
+    .book-info h2 {
+      margin-top: 0;
+      color: #7b1fa2;
+      font-size: 1.8rem;
+    }
+    
+    .book-info p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+    
+    .info-label {
+      /* Style label info */
+      font-weight: bold;
+      color: #7b1fa2;
+      display: inline-block;
+      min-width: 80px;
+    }
+    
+    .availability {
+      /* Style status ketersediaan */
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    
+    .available {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    .unavailable {
+      background-color: #f44336;
+      color: white;
+    }
+    
+    footer {
+      /* Style footer */
+      background-color: #7b1fa2;
+	  display: flex;
+	  align-items: center;
+      text-align: center;
+	  justify-content: center;
+      padding: 15px;
+      color: white;
+      font-weight: bold;
+      margin-top: 30px;
+	  margin-bottom: 30px;
+	  height: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      /* Responsive design untuk mobile */
+      .book-detail {
+        flex-direction: column;
+      }
+      
+      .book-cover-large {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+      }
+      
+      .modal-content {
+        width: 90%;
+        padding: 20px;
+      }
+      
+      .book-container {
+        padding: 0 20px;
+      }
+      
+      .search-bar input {
+        width: 80%;
+      }
+      
+      .search-bar button {
+        margin-top: 10px;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="Toastiary Logo">
+    <h1>Toastiary</h1>
+  </header>
+  
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="profil/profil.html">Profil</a></li>
+      <li><a href="layanan/layanan.html">Layanan</a></li>
+      <li><a href="katalog/opac.html">OPAC</a></li>
+      <li><a href="koleksi/koleksi.html">Koleksi</a></li>
+      <li>
+        <a href="#">Panduan</a>
+        <ul>
+          <li><a href="panduan/opac.html">Panduan OPAC</a></li>
+          <li><a href="panduan/syarat.html">Syarat & Ketentuan</a></li>
+          <li><a href="panduan/faq.html">FAQ</a></li>
+        </ul>
+      </li>
+      <li><a href="kontak kami/kontak kami.html">Kontak Kami</a></li>
+      <li><a href="sign up/login sign up page.html">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <!-- Search bar untuk pencarian buku -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Cari bukumu di sini!">
+    <button onclick="cariBuku()"><i class="fas fa-search"></i> Cari</button>
+  </div>
+  
+  <!-- Judul section ketersediaan buku -->
+  <div class="section-title">KETERSEDIAAN</div>
+  
+  <!-- Container untuk daftar buku -->
+  <div class="book-container">
+    <!-- Card buku pertama -->
+    <div class="book-card" data-title="dongeng mancanegara pilihan">
+      <img class="book-cover" src="https://i.pinimg.com/736x/3d/91/72/3d9172e64b920dbffc24d7882b5e4b5a.jpg" alt="Dongeng Mancanegara Pilihan">
+      <div class="book-title">Dongeng Mancanegara Pilihan</div>
+      <div class="buttons">
+        <button><i class="far fa-heart"></i></button>
+        <button><i class="far fa-comment"></i></button>
+        <button><i class="far fa-bookmark"></i></button>
+      </div>
+      <button class="detail-button" onclick="showBookDetail('Dongeng Mancanegara Pilihan', 'https://i.pinimg.com/736x/3d/91/72/3d9172e64b920dbffc24d7882b5e4b5a.jpg', 'Apa yang dilakukan Serigala setelah menghilangkan Si Tudung Merah dan neneknya? Bagaimana kisah Pangeran Katak yang ingin mencari teman? Selain itu, ada kisah mengharukan dari Gadis Korek Api. Semua dongeng pilihan ada di buku ini pastinya disertai dengan ilustrasi indah yang membuatmu kagum!', 'Heru Kurniawan', 'Gramedia Widiasarana Indonesia', 'Fiksi, Dongeng', 'Indonesia', '9786020526843', '188', true)">
+        <i class="fas fa-info-circle"></i> Detail
+      </button>
+    </div>
+    
+    <!-- Card buku kedua -->
+    <div class="book-card" data-title="the butterfly garden">
+      <img class="book-cover" src="https://i.pinimg.com/736x/18/42/b8/1842b8e14cbc6044bc4ad54467c6c417.jpg" alt="The Butterfly Garden">
+      <div class="book-title">The Butterfly Garden</div>
+      <div class="buttons">
+        <button><i class="far fa-heart"></i></button>
+        <button><i class="far fa-comment"></i></button>
+        <button><i class="far fa-bookmark"></i></button>
+      </div>
+      <button class="detail-button" onclick="showBookDetail('The Butterfly Garden', 'https://i.pinimg.com/736x/18/42/b8/1842b8e14cbc6044bc4ad54467c6c417.jpg', 'Charlotte dan kawan-kawan terbawa ke dunia lain. Di sana mereka harus memecahkan satu demi satu teka-teki alfabet. Mampukah mereka kembali?', 'Meghan Alesha', 'Dar! Mizan', 'Fiksi, Fantasi', 'Indonesia', '9786232542662', '84', false)">
+        <i class="fas fa-info-circle"></i> Detail
+      </button>
+    </div>
+    
+    <!-- Card buku ketiga -->
+    <div class="book-card" data-title="aku bisa membaca">
+      <img class="book-cover" src="https://i.pinimg.com/736x/38/41/66/384166b673c15e73b3cf47438ac356ee.jpg" alt="Aku Bisa Membaca">
+      <div class="book-title">Aku Bisa Membaca</div>
+      <div class="buttons">
+        <button><i class="far fa-heart"></i></button>
+        <button><i class="far fa-comment"></i></button>
+        <button><i class="far fa-bookmark"></i></button>
+      </div>
+      <button class="detail-button" onclick="showBookDetail('Aku Bisa Membaca', 'https://i.pinimg.com/736x/38/41/66/384166b673c15e73b3cf47438ac356ee.jpg', 'Membaca adalah salah satu kegiatan yang bermanfaat untuk semua orang. Banyak hal yang bisa diperoleh dalam kehidupan pada orang yang rajin membaca. Oleh karena itu, mengajarkan dan membiasakan anak untuk membaca sejak dini adalah salah satu tugas orangtua. Mengajarkan anak membaca tentu membutuhkan keseriusan dan kesabaran bagi para orangtua dan guru.', 'Yol Yulianto', 'Bhuana Ilmu Populer', 'Fiksi Anak & Remaja, Buku Aktivitas', 'Indonesia', '9786230410659', '68', false)">
+        <i class="fas fa-info-circle"></i> Detail
+      </button>
+    </div>
+	
+    <!-- Card buku keempat -->
+    <div class="book-card" data-title="ayo berteman!">
+      <img class="book-cover" src="https://i.pinimg.com/736x/be/93/4c/be934ca4ca55a05e01254c4ee470cbee.jpg" alt="Ayo Berteman!">
+      <div class="book-title">Ayo Berteman!</div>
+      <div class="buttons">
+        <button><i class="far fa-heart"></i></button>
+        <button><i class="far fa-comment"></i></button>
+        <button><i class="far fa-bookmark"></i></button>
+      </div>
+      <button class="detail-button" onclick="showBookDetail('Ayo Berteman!', 'https://i.pinimg.com/736x/be/93/4c/be934ca4ca55a05e01254c4ee470cbee.jpg', 'Empat karakter di buku ini, yaitu Aubrey, Zafran, Embun, dan Raka adalah anak berkebutuhan khusus dengan ciri khasnya masing-masing. Grace Melia, sang penulis, mampu menuangkan dan menggambarkan isi hati dari keempat anak tersebut dengan cara yang mudah dipahami anak-anak di dalam buku ini. Saluut.', 'Grace Melia', 'Solusi Distribusi Buku CV', 'Fiksi Anak & Remaja, Buku Aktivitas', 'Indonesia', '9786237509073', '36', false)">
+        <i class="fas fa-info-circle"></i> Detail
+      </button>
+    </div>
+  </div>
+    
+  <!-- Modal untuk menampilkan detail buku -->
+  <div id="bookModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="book-detail">
+        <img id="modalBookCover" class="book-cover-large" src="" alt="Book Cover">
+        <div class="book-info">
+          <h2 id="modalBookTitle"></h2>
+          <p><span class="info-label">Deskripsi:</span> <span id="modalBookDesc"></span></p>
+          <p><span class="info-label">Pengarang:</span> <span id="modalBookAuthor"></span></p>
+          <p><span class="info-label">Penerbit:</span> <span id="modalBookPublisher"></span></p>
+          <p><span class="info-label">Kategori:</span> <span id="modalBookCategory"></span></p>
+          <p><span class="info-label">Bahasa:</span> <span id="modalBookLanguage"></span></p>
+          <p><span class="info-label">ISBN:</span> <span id="modalBookISBN"></span></p>
+          <p><span class="info-label">Halaman:</span> <span id="modalBookPages"></span></p>
+          <div id="modalBookAvailability" class="availability"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+  <!-- Footer halaman -->
+  <footer>
+    &copy; 2023 Toastiary: Every Toast Whisper a Tales
+  </footer>
+  
+  <script>
+    // Fungsi untuk pencarian buku
+    function cariBuku() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+      const buku = document.querySelectorAll(".book-card");
+
+      buku.forEach(function(card) {
+        const judul = card.getAttribute("data-title").toLowerCase();
+        if (judul.includes(keyword)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // Fungsi untuk menampilkan detail buku di modal
+    function showBookDetail(title, cover, desc, author, publisher, category, language, isbn, pages, available) {
+      const modal = document.getElementById("bookModal");
+      document.getElementById("modalBookTitle").textContent = title;
+      document.getElementById("modalBookCover").src = cover;
+      document.getElementById("modalBookDesc").textContent = desc;
+      document.getElementById("modalBookAuthor").textContent = author;
+      document.getElementById("modalBookPublisher").textContent = publisher;
+      document.getElementById("modalBookCategory").textContent = category;
+      document.getElementById("modalBookLanguage").textContent = language;
+      document.getElementById("modalBookISBN").textContent = isbn;
+      document.getElementById("modalBookPages").textContent = pages + " halaman";
+      
+      const availabilityElement = document.getElementById("modalBookAvailability");
+      if (available) {
+        availabilityElement.textContent = "Tersedia";
+        availabilityElement.className = "availability available";
+      } else {
+        availabilityElement.textContent = "Tidak Tersedia";
+        availabilityElement.className = "availability unavailable";
+      }
+      
+      modal.style.display = "block";
+    }
+
+    // Fungsi untuk menutup modal
+    function closeModal() {
+      document.getElementById("bookModal").style.display = "none";
+    }
+
+    // Event listener untuk klik di luar modal
+    window.onclick = function(event) {
+      const modal = document.getElementById("bookModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+
+    // Event listener untuk tombol Enter di search input
+    document.getElementById("searchInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        cariBuku();
+      }
+    });
+  </script>
+</body>
+</html>

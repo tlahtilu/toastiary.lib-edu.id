@@ -91,7 +91,7 @@
     }
     
     /* === PRELOADER === */
-    #preloader {
+    #preloader { /* yang awal toastiary */
       position: fixed;
       left: 0;
       top: 0;
@@ -103,7 +103,13 @@
       justify-content: center;
       flex-direction: column;
       z-index: 9999;
+	  transition: opacity 0.5s ease, visibility 0.5s ease;
     }
+	
+	#preloader.hide {
+	  opacity: 0;
+	  visibility: hidden;
+	}
     
     #preloader h1 {
       font-size: 48px;
@@ -346,6 +352,14 @@
       display: flex;
       align-items: center;
     }
+	
+	.btn-reminder {
+	  display: inline-block;
+	  color: black;
+	  border-radius: 5px;
+	  text-decoration: none;
+	}
+
     
     /* === TEAM SECTION === */
     .team-section { /* kawan perpus */
@@ -423,6 +437,123 @@
     .member-position {
       color: #7f8c8d;
       font-size: 13px;
+    }
+    
+    /* === NEWS SECTION === */
+    .news-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .news-header {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .news-header::before {
+      content: "📰";
+      margin-right: 10px;
+    }
+    
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    .news-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      background-color: white;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .news-image {
+      height: 120px;
+      background-color: #f0f0f0;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .news-content {
+      padding: 12px;
+    }
+    
+    .news-meta {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .news-date {
+      margin-right: 8px;
+    }
+    
+    .news-category {
+      background-color: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .news-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .news-title a:hover {
+      color: var(--primary);
+    }
+    
+    .see-all {
+      text-align: center;
+      margin-top: 25px;
+    }
+    
+    .see-all-btn {
+      display: inline-block;
+      padding: 8px 25px;
+      background-color: var(--secondary);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    
+    .see-all-btn:hover {
+      background-color: #e68a00;
     }
     
     /* === CHILD-FRIENDLY FEATURES === */
@@ -546,29 +677,34 @@
       transform: translateX(5px);
     }
     
-    .social-icons { /* medsos */
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    
-    .social-icons a {
-      display: inline-block;
-      width: 54px;
-      height: 32px;
-      transition: transform 0.3s;
-    }
-    
-    .social-icons a:hover {
-      transform: scale(1.2);
-    }
-    
-    .social-icons img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    
+	.social-icons {
+	  display: flex;
+	  gap: 8px; /* Ubah ini sesuai kebutuhan */
+	  margin-top: 10px;
+	  justify-content: flex-start; /* Bisa diganti center kalau mau ditengah */
+	  align-items: center;
+	}
+
+	.social-icons a {
+	  width: 30px;
+	  height: 30px;
+	  border-radius: 50%;
+	  overflow: hidden;
+	  display: inline-block;
+	  transition: transform 0.3s;
+	}
+
+	.social-icons a:hover {
+	  transform: scale(1.1);
+	}
+
+	.social-icons img {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	  display: block;
+	}
+
     .store-icons { /* google play */
       display: flex;
       flex-direction: column;
@@ -622,6 +758,10 @@
       
       .container {
         width: 100%;
+      }
+      
+      .news-grid {
+        grid-template-columns: 1fr;
       }
       
       .floating-character {
@@ -789,7 +929,7 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="profil/profil.html">Profil</a></li>
       <li><a href="layanan/layanan.html">Layanan</a></li>
       <li><a href="katalog/opac.html">OPAC</a></li>
@@ -861,71 +1001,71 @@
       </div>
 
       <!-- Agenda Section - Updated Version -->
-  <div class="agenda-container">
-    <h2 style="color: #1e70bf; margin-bottom: 15px;">🗓 Agenda</h2>
-    
-    <div class="agenda-period">Akan Datang</div>
-    
-    <div class="agenda-event">
-      <span>Panggung Boneka Tangan</span>
-      <span class="event-date">3 Mei 2025</span>
-    </div>
-    
-    <div class="agenda-event">
-      <span>Dongeng Musikal</span>
-      <span class="event-date">16 Agustus 2025</span>
-    </div>
-	<div class="agenda-event">
-      <span>Penampilan Sanggar Tari</span>
-      <span class="event-date">20 September 2025</span>
-    </div>
-    
-    <div class="agenda-event">
-      <span>Boneka Ajaib Bercerita</span>
-      <span class="event-date">12 Oktober 2025</span>
-    </div>
-    
-    <div class="agenda-period">Sudah Berlalu</div>
-    
-    <div class="agenda-event">
-      <span>Origami Cerita</span>
-      <span class="event-date">21 Des 2024</span>
-    </div>
-	
-	<div class="agenda-event">
-      <span>Kontes Menggambar dan Mewarnai</span>
-      <span class="event-date">16 Agu 2024</span>
-    </div>
-  </div>
+      <div class="agenda-container">
+        <h2 style="color: #1e70bf; margin-bottom: 15px;">🗓 Agenda</h2>
+        
+        <div class="agenda-period">Akan Datang</div>
+        
+        <div class="agenda-event">
+		<a href="https://calendar.google.com/" target="_blank" class="btn-reminder">Panggung Boneka Tangan</a>
+          <span class="event-date">3 Mei 2025</span>
+        </div>
+        
+        <div class="agenda-event">
+          <span>Dongeng Musikal</span>
+          <span class="event-date">16 Agustus 2025</span>
+        </div>
+        <div class="agenda-event">
+          <span>Penampilan Sanggar Tari</span>
+          <span class="event-date">20 September 2025</span>
+        </div>
+        
+        <div class="agenda-event">
+          <span>Boneka Ajaib Bercerita</span>
+          <span class="event-date">12 Oktober 2025</span>
+        </div>
+        
+        <div class="agenda-period">Sudah Berlalu</div>
+        
+        <div class="agenda-event">
+          <span>Origami Cerita</span>
+          <span class="event-date">21 Desember 2024</span>
+        </div>
+        
+        <div class="agenda-event">
+          <span>Kontes Menggambar dan Mewarnai</span>
+          <span class="event-date">16 Agustus 2024</span>
+        </div>
+      </div>
 
-     <!-- FAQ Section - Updated Version -->
-  <div class="faq-container">
-    <h2 style="color: #ff9933; margin-bottom: 15px;">❓ FAQ</h2>
-    
-    <div class="faq-item">
-      <div class="faq-question">Apa itu Toastiary?</div>
-      <div class="faq-answer">
-        Toastiary adalah perpustakaan online khusus untuk anak-anak usia 5-12 tahun. 
-        Kamu bisa membaca buku digital, menonton video edukasi, dan berinteraksi 
-        dengan pustakawan kami secara online dari rumah!
+      <!-- FAQ Section - Updated Version -->
+      <div class="faq-container">
+        <h2 style="color: #ff9933; margin-bottom: 15px;">❓ FAQ</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">Apa itu Toastiary?</div>
+          <div class="faq-answer">
+            Toastiary adalah perpustakaan online khusus untuk anak-anak usia 5-12 tahun. 
+            Kamu bisa membaca buku digital, menonton video edukasi, dan berinteraksi 
+            dengan pustakawan kami secara online dari rumah!
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Bagaimana cara mencari buku di katalog online (OPAC)?</div>
+          <div class="faq-answer">
+            Cukup buka menu OPAC/Katalog Online, lalu ketik judul buku, nama penulis, 
+            atau topik yang kamu cari. Klik tombol cari, dan pilih buku yang menarik minatmu!
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Bolehkah memberikan saran buku untuk Toastiary?</div>
+          <div class="faq-answer">
+            Tentu saja! Kamu bisa mengirimkan saran melalui fitur Ask Tiary atau mengisi 
+            form saran di halaman Kontak Kami. Kami sangat menghargai masukan dari pembaca kecil kami!
+          </div>
+        </div>
       </div>
-    </div>
-	<div class="faq-item">
-      <div class="faq-question">Bagaimana cara mencari buku di katalog online (OPAC)?</div>
-      <div class="faq-answer">
-        Cukup buka menu OPAC/Katalog Online, lalu ketik judul buku, nama penulis, 
-        atau topik yang kamu cari. Klik tombol cari, dan pilih buku yang menarik minatmu!
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">Bolehkah memberikan saran buku untuk Toastiary?</div>
-      <div class="faq-answer">
-        Tentu saja! Kamu bisa mengirimkan saran melalui fitur Ask Tiary atau mengisi 
-        form saran di halaman Kontak Kami. Kami sangat menghargai masukan dari pembaca kecil kami!
-		 </div>
-    </div>
-  </div>
 
       <!-- Ulasan & Informasi -->
       <div class="container">
@@ -944,6 +1084,74 @@
       </div>
     </div>
 
+<!-- News Section -->
+<div class="news-section">
+  <div class="news-header">Berita Terbaru</div>
+  
+  <div class="news-grid">
+    <!-- Berita 1 -->
+    <div class="news-card">
+      <div class="news-image" style="background-image: url('https://i.pinimg.com/736x/22/71/e4/2271e40d5bf6c49948bfa7e5195f7215.jpg')"></div>
+      <div class="news-content">
+        <div class="news-meta">
+          <span class="news-date">2025-05-27</span>
+          <span class="news-category">Berita</span>
+        </div>
+        <div class="news-title">
+          <a href="https://mediarakata.com/2025/05/27/dispursip-pesawaran-berikan-hadiah-juara-lomba-perpustakaan-desa-terbaik-se-kabupaten-pesawaran/">Dispursip Pesawaran Berikan Hadiah Juara Lomba Perpustakaan Desa Terbaik se-Kabupaten Pesawaran</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Berita 2 -->
+    <div class="news-card">
+      <div class="news-image" style="background-image: url('https://i.pinimg.com/736x/ae/43/be/ae43bebe917ac2e2e1c5ed1a9e1c6ac3.jpg')"></div>
+      <div class="news-content">
+        <div class="news-meta">
+          <span class="news-date">2025-05-21</span>
+          <span class="news-category">Berita</span>
+        </div>
+        <div class="news-title">
+          <a href="https://www.perpusnas.go.id/berita/perpustakaan-penguat-mutu-pendidikan">Perpustakaan Penguat Mutu Pendidikan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Berita 3 -->
+    <div class="news-card">
+      <div class="news-image" style="background-image: url('https://i.pinimg.com/736x/cd/3c/22/cd3c222920a6fc07bce7d798adb5a7dc.jpg')"></div>
+      <div class="news-content">
+        <div class="news-meta">
+          <span class="news-date">2025-05-21</span>
+          <span class="news-category">Berita</span>
+        </div>
+        <div class="news-title">
+          <a href="https://www.perpusnas.go.id/berita/transformasi-digital-jadi-fokus-inovasi-layanan-publik-perpusnas">Transformasi Digital Jadi Fokus Inovasi Layanan Publik Perpusnas</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Berita 4 -->
+    <div class="news-card">
+      <div class="news-image" style="background-image: url('https://i.pinimg.com/736x/7b/0d/9b/7b0d9b39597437916d1d375dcb84e605.jpg')"></div>
+      <div class="news-content">
+        <div class="news-meta">
+          <span class="news-date">2025-05-27</span>
+          <span class="news-category">Berita</span>
+        </div>
+        <div class="news-title">
+          <a href="https://www.teras.id/read/634350/festival-literasi-gowa-2025-resmi-dibuka-gedung-perpustakaan-jadi-simpul-peradaban-lokal">Festival Literasi Gowa 2025 Resmi Dibuka, Gedung Perpustakaan Jadi Simpul Peradaban Lokal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="see-all">
+    <a href="#" class="see-all-btn">Lihat Semua Berita</a>
+  </div>
+</div>
+
+	
     <!-- Team Section -->
     <div class="team-section">
       <div class="team-header">
@@ -1039,10 +1247,10 @@
    
       <div class="footer-column">
         <h3>Informasi</h3>
-        <a href="#">Event</a>
+        <a href="katalog/opac.html">Opac</a>
         <a href="koleksi/koleksi.html">Koleksi</a>
-        <a href="#">Layanan</a>
-        <a href="#">Asktiary</a>
+        <a href="layanan/layanan.html">Layanan</a>
+        <a href="kontak kami/kontak kami.html">Kontak kami</a>
       </div>
 
       <div class="footer-column">
@@ -1081,6 +1289,11 @@
   </footer>
 
  <script>
+   window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('preloader').classList.add('hide');
+    }, 1000); // durasi 3 detik
+  });
     // Carousel functionality
     let currentIndex = 0;
     const slides = document.getElementById('carouselSlides');
@@ -1232,6 +1445,6 @@
     chatInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') processMessage();
     });
-  </script>
+</script>
 </body>
 </html>
