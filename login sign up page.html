@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadata dasar -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Sign Up - Toastiary</title>
+
+  <style>
+    /* Reset dan font default */
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Gaya latar belakang halaman utama */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f9d4ec, #d6e8ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Kotak kontainer untuk form login/signup */
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    /* Judul form */
+    h2 {
+      color: #ff6392;
+      margin-bottom: 1rem;
+    }
+
+    /* Input field */
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    /* Efek saat input aktif (focus) */
+    input:focus {
+      border-color: #ff9ebc;
+      outline: none;
+    }
+
+    /* Tombol login/sign up */
+    button {
+      background-color: #7abaff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      width: 100%;
+      margin-top: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Efek hover tombol */
+    button:hover {
+      background-color: #5397e6;
+    }
+
+    /* Tombol kembali ke halaman sebelumnya */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    /* Efek hover tombol kembali */
+    .back-button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Gambar icon panah di dalam tombol kembali */
+    .back-button img {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Link untuk toggle form login/sign up */
+    .toggle-link {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Gaya link dalam toggle */
+    .toggle-link a {
+      color: #ff6392;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Animasi muncul dari atas */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Kontainer utama form -->
+  <div class="container" id="form-container">
+    <!-- Judul form berubah tergantung mode -->
+    <h2 id="form-title">Sign Up</h2>
+
+    <!-- Form sign up (default tampil) -->
+    <form id="signup-form">
+      <input type="email" placeholder="Email" required />
+      <input type="text" placeholder="Username" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Create Account</button>
+    </form>
+
+    <!-- Form login (disembunyikan awalnya) -->
+    <form id="login-form" style="display: none;">
+      <input type="text" placeholder="Username" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Link untuk ganti mode antara login & sign up -->
+    <div class="toggle-link">
+      <span id="toggle-text">Already have an account? <a href="#" id="toggle-link">Login</a></span>
+    </div>
+  </div>
+
+  <script>
+  // Ambil elemen form dan teks yang dibutuhkan
+  const signupForm = document.getElementById('signup-form');
+  const loginForm = document.getElementById('login-form');
+  const toggleLink = document.getElementById('toggle-link');
+  const formTitle = document.getElementById('form-title');
+  const toggleText = document.getElementById('toggle-text');
+
+  // Tambahkan alert saat form sign up disubmit
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("This feature will be available soon!");
+  });
+
+  // Tambahkan alert saat form login disubmit
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("This feature will be available soon!");
+  });
+
+  // Fungsi untuk toggle tampilan login <-> sign up
+  toggleLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isLogin = loginForm.style.display === 'block';
+
+    if (isLogin) {
+      // Ganti ke sign up
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'block';
+      formTitle.textContent = 'Sign Up';
+      toggleText.innerHTML = `Already have an account? <a href="#" id="toggle-link">Login</a>`;
+    } else {
+      // Ganti ke login
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+      formTitle.textContent = 'Login';
+      toggleText.innerHTML = `Don't have an account? <a href="#" id="toggle-link">Sign Up</a>`;
+    }
+
+    // Bind ulang event listener ke elemen toggle link baru
+    document.getElementById('toggle-link').addEventListener('click', arguments.callee);
+  });
+  </script>
+
+  <!-- Tombol kembali ke halaman sebelumnya -->
+  <button class="back-button" onclick="window.location.href='index.html'">
+    <img src="https://img.icons8.com/?size=80&id=uXxiRTNgkmaS&format=png" alt="Back">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+
+</body>
+</html>
